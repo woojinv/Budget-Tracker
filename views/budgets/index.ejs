@@ -11,12 +11,18 @@
         </thead>
         <tbody>
             <% budgets.forEach(b => { %>
+                <% if (user && user._id.equals(b.userId)) { %> 
                 <tr>
                     <td><%= b.name %></td>
                     <td><%= b.budget %> </td>
                     <td><a href="/budgets/<%= b._id %>">view</a></td>
+                    <td>
+                        <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
+                            <button type="submit">X</button>
+                        </form>
+                    </td>
                 </tr>
-
+                <% } %> 
             <% }) %> 
         </tbody>
     </table>

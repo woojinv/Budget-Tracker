@@ -4,7 +4,8 @@ module.exports = {
     index,
     new: newBudget,
     create,
-    show
+    show,
+    delete: deleteBudget
 }
 
 function index(req, res) {
@@ -43,5 +44,15 @@ function show(req, res) {
             remaining: budget.budget
         });
     })
-    
+}
+
+function deleteBudget(req, res) {
+    console.log(req.params.id, "<<<< This is the id");
+    Budget.findOneAndDelete(
+        // ensure that the budget was created by the logged in user
+        {_id: req.params.id, userId: req.user._id}, function(err) {
+            // redirect to index view
+            res.redirect('/budgets');
+        }
+    )
 }

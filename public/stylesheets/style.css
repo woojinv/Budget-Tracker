@@ -14,3 +14,9 @@
 .login img {
   height: 30px;
 }
+
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
