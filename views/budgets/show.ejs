@@ -1,0 +1,9 @@
+<%- include('../partials/header') %> 
+    <% if (user) { %>
+        <section id="show-page">
+            <div><%= budget.name %> </div>
+            <div>$<%= budget.spent %> spent</div>
+            <div>$<%= remaining %> remaining</div>
+        </section>
+    <% } %>
+<%- include('../partials/footer') %>  

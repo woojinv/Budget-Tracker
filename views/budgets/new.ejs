@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+    <% if (user) { %> 
+    <form action="/budgets" method="POST">
+        <label>Name:</label>
+        <input type="text" name="name">
+        <label>Budget($):</label>
+        <input type="number" name="budget">
+        <input type="submit" value="Add Budget">
+    </form>
+    <% } %> 
+<%- include('../partials/footer') %> 

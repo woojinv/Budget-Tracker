@@ -1,0 +1,14 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema
+
+const budgetSchema = new Schema({
+    name: String,
+    budget: Number,
+    userId: {type: Schema.Types.ObjectId, ref: 'User'}, // referencing the user documents
+    spent: {type: Number, default: 0},
+    remaining: Number
+}, {
+    timestamps: true
+});
+
+module.exports = mongoose.model('Budget', budgetSchema);
