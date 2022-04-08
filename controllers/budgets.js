@@ -5,7 +5,8 @@ module.exports = {
     new: newBudget,
     create,
     show,
-    delete: deleteBudget
+    delete: deleteBudget,
+    edit
 }
 
 function index(req, res) {
@@ -55,4 +56,16 @@ function deleteBudget(req, res) {
             res.redirect('/budgets');
         }
     )
+}
+
+function edit(req, res) {
+    console.log(req.params.id, "<<< this is the id");
+    Budget.findOne({_id: req.params.id, userId: req.user._id}, function(err, budget) {
+        if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
+        console.log(budget, "<<< this is the budget");
+        res.render('budgets/edit', {
+            title: 'Edit Budget',
+            budget
+        })
+    })
 }
