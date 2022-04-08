@@ -6,7 +6,8 @@ module.exports = {
     create,
     show,
     delete: deleteBudget,
-    edit
+    edit,
+    update
 }
 
 function index(req, res) {
@@ -64,8 +65,22 @@ function edit(req, res) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
         console.log(budget, "<<< this is the budget");
         res.render('budgets/edit', {
-            title: 'Edit Budget',
+            title: budget.name,
             budget
         })
     })
+}
+
+function update(req, res) {
+    Budget.findOneAndUpdate(
+        {_id: req.params.id, userId: req.user._id}, 
+        // update object with updated properties
+        req.body,
+        // options object with new: true to make sure updated doci s retuend
+        {new: true},
+        function(err, budget) {
+            if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
+            res.redirect(`budgets/${budget._id}`)
+        }
+        )
 }
