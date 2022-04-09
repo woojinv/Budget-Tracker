@@ -30,6 +30,8 @@ function create(req, res) {
     const budget = new Budget(req.body);
     // Assign the logged in user's id to that budget
     budget.userId = req.user._id;
+    budget.remaining = budget.budget;
+    console.log(budget.remaining, "<<< This is remaining")
     budget.save(function(err) {
         if (err) return res.redirect('/budgets/new');
         res.redirect(`/budgets/${budget._id}`);
