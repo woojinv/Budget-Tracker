@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Budget</th>
+                <th>Spent</th>
                 <th></th>
             </tr>
         </thead>
@@ -14,7 +14,7 @@
                 <% if (user && user._id.equals(b.userId)) { %> 
                 <tr>
                     <td><%= b.name %></td>
-                    <td><%= b.budget %> </td>
+                    <td><%= b.spent %> </td>
                     <td><a href="/budgets/<%= b._id %>">view</a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">

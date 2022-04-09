@@ -10,8 +10,10 @@ module.exports = {
     update
 }
 
+
 function index(req, res) {
-    Budget.find({}, function(err, budgets) {
+    // find all budgets and sort them with most recent at the top
+    Budget.find({}).sort({ createdAt: 'desc'}).exec(function(err, budgets) {
         if (err) return res.redirect('/home');
         res.render('budgets/index', {
             title: 'All Budgets',
@@ -32,6 +34,7 @@ function create(req, res) {
     // Assign the logged in user's id to that budget
     budget.userId = req.user._id;
     budget.remaining = budget.budget;
+    console.log(budget, "<<< Newly created budget");
     budget.save(function(err) {
         if (err) return res.redirect('/budgets/new');
         res.redirect(`/budgets/${budget._id}`);
@@ -40,6 +43,7 @@ function create(req, res) {
 
 function show(req, res) {
     Budget.findById(req.params.id, function(err, budget) {
+        console.log(budget, "<<< This is also the updated budget");
         res.render('budgets/show', {
             title: budget.name,
             budget,
@@ -76,6 +80,11 @@ function update(req, res) {
         // options object with new: true to make sure updated doci s retuend
         {new: true},
         function(err, budget) {
+            console.log(budget, "<<< This is the new budget");
+            console.log(req.body, "<<< This is req.body");
+            budget.remaining = budget.budget;
+            budget.save();
+            console.log(budget, '<<< Budget with new remaining value')
             if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
             res.redirect(`/budgets/${budget._id}`)
             }
