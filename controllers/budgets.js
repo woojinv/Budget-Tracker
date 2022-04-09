@@ -12,6 +12,7 @@ module.exports = {
 
 function index(req, res) {
     Budget.find({}, function(err, budgets) {
+        if (err) return res.redirect('/home');
         res.render('budgets/index', {
             title: 'All Budgets',
             budgets
