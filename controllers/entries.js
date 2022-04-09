@@ -10,7 +10,7 @@ function create(req, res) {
     // find the budget with the id
     Budget.findById(req.params.id, function(err, budget) {
         // put req.body into the entries array of that budget. 
-        budget.entries.push(req.body);
+        budget.entries.push(req.body);        
         // save the budget. 
         budget.save(function(err) {
             // redirect to the budget's show page.

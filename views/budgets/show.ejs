@@ -20,8 +20,31 @@
                 </br>
                 <input type="submit" value="Add Entry">
             </form>
+        </br>
+            <% if (budget.entries.length) { %> 
+            <table>
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+            </table>
 
-
+            <tbody>
+                <% budget.entries.forEach(e => { %>
+                    <tr>
+                        <td><%= e.amount %></td>
+                        <td><%= e.date.toLocaleDateString() %></td>
+                        <td><%= e.description %></td>
+                        </br>
+                    </tr>
+                <% }); %> 
+            </tbody>
+            <% } else { %> 
+                <h5>No Entries Yet</h5>
+            <% } %> 
         <!-- Nav Bar on bottom of page -->
         <div class="navbar">
             <a href="/budgets">All</a>
