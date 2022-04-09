@@ -17,8 +17,11 @@ function create(req, res) {
         // remaining should subtract each each
         budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount);
         // save the budget. 
+        console.log(req.body, "This is req.body");
+        console.log(req.body.date, "<<< This is date of entry");
         budget.save(function(err) {
             // redirect to the budget's show page.
+            console.log(budget, "<<< This is the saved budget");
             res.redirect(`/budgets/${budget._id}`);
         });
     });
