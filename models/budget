@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
+const entrySchema = new Schema({
+    amount: Number,
+    date: Date,
+    description: String
+}, {
+    timestamps: true
+});
+
+
 const budgetSchema = new Schema({
     name: String,
     budget: Number,
     userId: {type: Schema.Types.ObjectId, ref: 'User'}, // referencing the user documents
     spent: {type: Number, default: 0},
-    remaining: Number
+    remaining: Number,
+    entries: [entrySchema] // embedded entries. One budget has many entries
 }, {
     timestamps: true
 });

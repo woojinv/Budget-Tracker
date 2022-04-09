@@ -6,6 +6,22 @@
             <div>$<%= remaining %> remaining</div>
         </section>
 
+        </br>
+        <h2>Entries</h2>
+            <form id="add-entry-form" action="/budgets/<%= budget._id %>/entries" method="POST">
+                <label>Amount:</label>
+                <input type="Number" name="amount">
+                </br>
+                <label>Date:</label>
+                <input type="datetime-local" name="date">
+                </br>
+                <label>Description:</label>
+                <input type="text" name="description">
+                </br>
+                <input type="submit" value="Add Entry">
+            </form>
+
+
         <!-- Nav Bar on bottom of page -->
         <div class="navbar">
             <a href="/budgets">All</a>
