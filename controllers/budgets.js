@@ -82,7 +82,7 @@ function update(req, res) {
         function(err, budget) {
             console.log(budget, "<<< This is the new budget");
             console.log(req.body, "<<< This is req.body");
-            budget.remaining = budget.budget;
+            budget.remaining = budget.budget - budget.spent;
             budget.save();
             console.log(budget, '<<< Budget with new remaining value')
             if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
