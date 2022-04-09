@@ -32,7 +32,6 @@ function create(req, res) {
     // Assign the logged in user's id to that budget
     budget.userId = req.user._id;
     budget.remaining = budget.budget;
-    console.log(budget.remaining, "<<< This is remaining")
     budget.save(function(err) {
         if (err) return res.redirect('/budgets/new');
         res.redirect(`/budgets/${budget._id}`);
@@ -40,9 +39,7 @@ function create(req, res) {
 }
 
 function show(req, res) {
-    console.log(req.params.id, "<<< This is req.params.id");
     Budget.findById(req.params.id, function(err, budget) {
-        console.log(budget, "<<< This is the budget");
         res.render('budgets/show', {
             title: budget.name,
             budget,
@@ -52,7 +49,6 @@ function show(req, res) {
 }
 
 function deleteBudget(req, res) {
-    console.log(req.params.id, "<<<< This is the id");
     Budget.findOneAndDelete(
         // ensure that the budget was created by the logged in user
         {_id: req.params.id, userId: req.user._id}, function(err) {
@@ -63,10 +59,8 @@ function deleteBudget(req, res) {
 }
 
 function edit(req, res) {
-    console.log(req.params.id, "<<< this is the id");
     Budget.findOne({_id: req.params.id, userId: req.user._id}, function(err, budget) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
-        console.log(budget, "<<< this is the budget");
         res.render('budgets/edit', {
             title: "Edit: " + budget.name,
             budget
