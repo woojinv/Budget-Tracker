@@ -28,6 +28,7 @@
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th></th>
                     </tr>
                 </thead>
             </table>
@@ -38,6 +39,11 @@
                         <td><%= e.amount %></td>
                         <td><%= e.date.toLocaleDateString() %></td>
                         <td><%= e.description %></td>
+                        <td>
+                            <form action="/entries/<%= e._id %>?_method=DELETE" method="POST">
+                                <button type="submit">X</button>
+                            </form>
+                        </td>
                         </br>
                     </tr>
                 <% }); %> 
