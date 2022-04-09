@@ -65,7 +65,7 @@ function edit(req, res) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
         console.log(budget, "<<< this is the budget");
         res.render('budgets/edit', {
-            title: budget.name,
+            title: "Edit: " + budget.name,
             budget
         })
     })
