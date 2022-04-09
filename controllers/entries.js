@@ -2,7 +2,9 @@ const Budget = require('../models/budget');
 
 module.exports = {
     create,
-    delete: deleteEntry
+    delete: deleteEntry,
+    edit,
+    update
 }
 
 function create(req, res) {
@@ -39,4 +41,32 @@ function deleteEntry(req, res) {
             res.redirect(`/budgets/${budget._id}`);
         })
     })
+}
+
+function edit(req, res) {
+    Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
+        const entry = budget.entries.id(req.params.id);
+        res.render('entries/edit', {
+            title: 'Edit Entry',
+            budget,
+            entry
+        });
+    })
+}
+
+function update(req, res) {
+    Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
+        const entry = budget.entries.id(req.params.id);
+        if (!budget.userId.equals(req.user._id)) return res.redirect(`/budgets/${budget._id}`);
+        
+      
+        budget.spent = budget.spent + (parseInt(req.body.amount) - entry.amount);
+        
+        entry.amount = req.body.amount;
+        entry.date = req.body.date;
+        entry.description = req.body.description;
+        budget.save(function(err) {
+            res.redirect(`/budgets/${budget._id}`);
+        });
+    });
 }

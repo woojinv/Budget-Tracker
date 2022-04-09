@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+    <% if (user) { %>
+        <% if (user && user._id.equals(budget.userId)) { %>
+        <form action="/entries/<%= entry._id %>?_method=PUT" method="POST">
+            <label>Amount:</label>
+            <input type="number" name="amount">
+            </br>
+            <label>Date:</label>
+            <input type="Date" name="date">
+            </br>
+            <label>Description:</label>
+            <input type="text" name="description">
+            </br>
+            <input type="submit" value="Update Entry">
+        </form>
+
+        <!-- Nav Bar on bottom of page -->
+        <div class="navbar">
+            <a href="/budgets/<%= budget._id %>">Back</a>
+            <a href="/budgets">All</a>
+        </div>
+        <% } %>
+    <% } %>
+
+<%- include('../partials/footer') %>

@@ -31,23 +31,24 @@
                         <th></th>
                     </tr>
                 </thead>
-            </table>
+            
 
-            <tbody>
-                <% budget.entries.forEach(e => { %>
-                    <tr>
-                        <td><%= e.amount %></td>
-                        <td><%= e.date.toLocaleDateString() %></td>
-                        <td><%= e.description %></td>
-                        <td>
-                            <form action="/entries/<%= e._id %>?_method=DELETE" method="POST">
-                                <button type="submit">X</button>
-                            </form>
-                        </td>
-                        </br>
-                    </tr>
-                <% }); %> 
-            </tbody>
+                <tbody>
+                    <% budget.entries.forEach(e => { %>
+                        <tr>
+                            <td><a href="/entries/<%= e._id %>/edit"><%= e.amount %></a></td>
+                            <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toLocaleDateString() %></a></td>
+                            <td><a href="/entries/<%= e._id %>/edit"><%= e.description %></a></td>
+                            <td>
+                                <form action="/entries/<%= e._id %>?_method=DELETE" method="POST">
+                                    <button type="submit">X</button>
+                                </form>
+                            </td>
+                            </br>
+                        </tr>
+                    <% }); %> 
+                </tbody>
+            </table>
             <% } else { %> 
                 <h5>No Entries Yet</h5>
             <% } %> 
