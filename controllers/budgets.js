@@ -44,6 +44,12 @@ function create(req, res) {
 function show(req, res) {
     Budget.findById(req.params.id, function(err, budget) {
         console.log(budget, "<<< This is also the updated budget");
+        console.log(budget.entries, "<<< These are the entries");
+        budget.entries.sort((a, b) => {
+            return b.date - a.date;
+        })
+        budget.save();
+        console.log(budget.entries, "<<< These entries should be sorted");
         res.render('budgets/show', {
             title: budget.name,
             budget,
