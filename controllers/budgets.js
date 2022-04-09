@@ -80,7 +80,7 @@ function update(req, res) {
         {new: true},
         function(err, budget) {
             if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
-            res.redirect(`budgets/${budget._id}`)
-        }
+            res.redirect(`/budgets/${budget._id}`)
+            }
         )
 }

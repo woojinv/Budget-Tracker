@@ -1,6 +1,6 @@
 <%- include('../partials/header') %> 
     <% if (user && user._id.equals(budget.userId)) { %> 
-        <form action="/budgets/<%= budget._id %>?_method=PUT" action="POST">
+        <form action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
             <label>Name:</label>
             <input type="text" name="name">
             <label>Budget:</label>
