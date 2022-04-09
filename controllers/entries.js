@@ -61,6 +61,7 @@ function update(req, res) {
         
       
         budget.spent = budget.spent + (parseInt(req.body.amount) - entry.amount);
+        budget.remaining = budget.remaining + (entry.amount - parseInt(req.body.amount));
         
         entry.amount = req.body.amount;
         entry.date = req.body.date;
