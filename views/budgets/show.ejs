@@ -9,15 +9,9 @@
         </br>
         <h2>Entries</h2>
             <form id="add-entry-form" action="/budgets/<%= budget._id %>/entries" method="POST">
-                <label></label>
                 <input type="Number" name="amount" placeholder="Enter Amount">
-                </br>
-                <label></label>
                 <input type="date" name="date">
-                </br>
-                <label></label>
                 <input type="text" name="description" placeholder="Enter Description">
-                </br>
                 <input type="submit" value="Add Entry">
             </form>
         </br>
