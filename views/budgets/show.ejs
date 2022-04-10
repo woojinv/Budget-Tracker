@@ -2,8 +2,8 @@
     <% if (user && user._id.equals(budget.userId)) { %>
         <section id="show-page">
             <a href="/budgets/<%= budget._id %>/edit">update</a>
-            <div>$<%= budget.spent %> spent</div>
-            <div>$<%= budget.remaining %> of $<%= budget.budget %> remaining</div>
+            <div><span style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+            <div><span style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
         </section>
 
         </br>
@@ -36,7 +36,7 @@
                 <tbody>
                     <% budget.entries.forEach(e => { %>
                         <tr>
-                            <td><a href="/entries/<%= e._id %>/edit"><%= e.amount %></a></td>
+                            <td><a href="/entries/<%= e._id %>/edit">$<%= e.amount %></a></td>
                             <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toISOString().slice(5, 10) %></a></td>
                             <td><a href="/entries/<%= e._id %>/edit"><%= e.description %></a></td>
                             <td>
