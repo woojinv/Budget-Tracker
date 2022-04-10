@@ -97,11 +97,8 @@ function archive(req, res) {
     Budget.findById(req.params.id, function(err, budget) {
         budget.archived = true;
         budget.save();
-        console.log(budget, "This is the budget");
-        console.log(req.params.id, "<<< This is the ID");
         res.redirect('/budgets');
     })
-    
 }
 
 function indexArchived(req, res) {

@@ -17,8 +17,6 @@ function create(req, res) {
         // remaining should subtract each each
         budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount);
         // save the budget. 
-        console.log(req.body, "This is req.body");
-        console.log(req.body.date, "<<< This is date of entry");
         budget.save(function(err) {
             // redirect to the budget's show page.
             console.log(budget, "<<< This is the saved budget");
@@ -56,7 +54,6 @@ function update(req, res) {
         const entry = budget.entries.id(req.params.id);
         if (!budget.userId.equals(req.user._id)) return res.redirect(`/budgets/${budget._id}`);
         
-      
         budget.spent = budget.spent + (parseInt(req.body.amount) - entry.amount);
         budget.remaining = budget.remaining + (entry.amount - parseInt(req.body.amount));
         
