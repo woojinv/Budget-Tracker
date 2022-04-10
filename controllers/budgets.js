@@ -7,11 +7,17 @@ module.exports = {
     show,
     delete: deleteBudget,
     edit,
-    update
+    update,
+    archive,
+    indexArchived,
+    unarchive
 }
 
+
 function index(req, res) {
-    Budget.find({}, function(err, budgets) {
+    // find all budgets and sort them with most recently updated at the top
+    Budget.find({}).sort({ updatedAt: 'desc'}).exec(function(err, budgets) {
+        if (err) return res.redirect('/home');
         res.render('budgets/index', {
             title: 'All Budgets',
             budgets
@@ -31,7 +37,6 @@ function create(req, res) {
     // Assign the logged in user's id to that budget
     budget.userId = req.user._id;
     budget.remaining = budget.budget;
-    console.log(budget.remaining, "<<< This is remaining")
     budget.save(function(err) {
         if (err) return res.redirect('/budgets/new');
         res.redirect(`/budgets/${budget._id}`);
@@ -39,9 +44,11 @@ function create(req, res) {
 }
 
 function show(req, res) {
-    console.log(req.params.id, "<<< This is req.params.id");
     Budget.findById(req.params.id, function(err, budget) {
-        console.log(budget, "<<< This is the budget");
+        budget.entries.sort((a, b) => {
+            return b.date - a.date;
+        })
+        budget.save();
         res.render('budgets/show', {
             title: budget.name,
             budget,
@@ -51,7 +58,6 @@ function show(req, res) {
 }
 
 function deleteBudget(req, res) {
-    console.log(req.params.id, "<<<< This is the id");
     Budget.findOneAndDelete(
         // ensure that the budget was created by the logged in user
         {_id: req.params.id, userId: req.user._id}, function(err) {
@@ -62,12 +68,10 @@ function deleteBudget(req, res) {
 }
 
 function edit(req, res) {
-    console.log(req.params.id, "<<< this is the id");
     Budget.findOne({_id: req.params.id, userId: req.user._id}, function(err, budget) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
-        console.log(budget, "<<< this is the budget");
         res.render('budgets/edit', {
-            title: "Edit: " + budget.name,
+            title: "Edit Budget",
             budget
         })
     })
@@ -81,8 +85,36 @@ function update(req, res) {
         // options object with new: true to make sure updated doci s retuend
         {new: true},
         function(err, budget) {
+            budget.remaining = budget.budget - budget.spent;
+            budget.save();
             if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
             res.redirect(`/budgets/${budget._id}`)
             }
         )
+}
+
+function archive(req, res) {
+    Budget.findById(req.params.id, function(err, budget) {
+        budget.archived = true;
+        budget.save();
+        res.redirect('/budgets');
+    })
+}
+
+function indexArchived(req, res) {
+    Budget.find({}).sort({ updatedAt: 'desc'}).exec(function(err, budgets) {
+        if (err) return res.redirect('/home');
+        res.render('budgets/archived', {
+            title: 'Archived Budgets',
+            budgets
+        });
+    });
+}
+
+function unarchive(req, res) {
+    Budget.findById(req.params.id, function(err, budget) {
+        budget.archived = false;
+        budget.save();
+        res.redirect('/budgets/archived');
+    })
 }

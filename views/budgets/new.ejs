@@ -2,10 +2,10 @@
     <% if (user) { %> 
     <form action="/budgets" method="POST">
         <label>Name:</label>
-        <input type="text" name="name">
+        <input type="text" name="name" placeholder="Ex: March Groceries">
         </br>
         <label>Budget ($):</label>
-        <input type="number" name="budget">
+        <input type="number" name="budget" placeholder="Round to the dollar!">
         </br>
         <input type="submit" value="Add Budget">
     </form>
@@ -13,6 +13,7 @@
     <!-- Nav Bar on bottom of page -->
     <div class="navbar">
         <a href="/budgets">All</a>
+        <a href="/budgets/archived">Archived</a>
     </div>
     <% } %> 
 <%- include('../partials/footer') %> 
