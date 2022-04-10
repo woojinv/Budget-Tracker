@@ -14,7 +14,7 @@
                 <% if (user && user._id.equals(b.userId)) { %> 
                 <tr>
                     <td><a href="/budgets/<%= b._id %>"><%= b.name %></a></td>
-                    <td><a href="/budgets/<%= b._id %>"><%= b.spent %></a></td>
+                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:red' : 'color:green' %>"><%= b.spent %></a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
                             <button type="submit">X</button>
