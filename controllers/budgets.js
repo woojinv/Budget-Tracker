@@ -13,7 +13,7 @@ module.exports = {
 
 function index(req, res) {
     // find all budgets and sort them with most recent at the top
-    Budget.find({}).sort({ createdAt: 'desc'}).exec(function(err, budgets) {
+    Budget.find({}).sort({ updatedAt: 'desc'}).exec(function(err, budgets) {
         if (err) return res.redirect('/home');
         res.render('budgets/index', {
             title: 'All Budgets',
