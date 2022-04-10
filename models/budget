@@ -16,7 +16,8 @@ const budgetSchema = new Schema({
     userId: {type: Schema.Types.ObjectId, ref: 'User'}, // referencing the user documents
     spent: {type: Number, default: 0},
     remaining: Number,
-    entries: [entrySchema] // embedded entries. One budget has many entries
+    entries: [entrySchema], // embedded entries. One budget has many entries
+    archived: {type: Boolean, default: false}
 }, {
     timestamps: true
 });

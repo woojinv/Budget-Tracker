@@ -7,7 +7,10 @@ module.exports = {
     show,
     delete: deleteBudget,
     edit,
-    update
+    update,
+    archive,
+    indexArchived,
+    unarchive
 }
 
 
@@ -88,4 +91,33 @@ function update(req, res) {
             res.redirect(`/budgets/${budget._id}`)
             }
         )
+}
+
+function archive(req, res) {
+    Budget.findById(req.params.id, function(err, budget) {
+        budget.archived = true;
+        budget.save();
+        console.log(budget, "This is the budget");
+        console.log(req.params.id, "<<< This is the ID");
+        res.redirect('/budgets');
+    })
+    
+}
+
+function indexArchived(req, res) {
+    Budget.find({}).sort({ updatedAt: 'desc'}).exec(function(err, budgets) {
+        if (err) return res.redirect('/home');
+        res.render('budgets/archived', {
+            title: 'Archived Budgets',
+            budgets
+        });
+    });
+}
+
+function unarchive(req, res) {
+    Budget.findById(req.params.id, function(err, budget) {
+        budget.archived = false;
+        budget.save();
+        res.redirect('/budgets/archived');
+    })
 }
