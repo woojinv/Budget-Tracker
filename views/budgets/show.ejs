@@ -1,9 +1,9 @@
 <%- include('../partials/header') %> 
     <% if (user && user._id.equals(budget.userId)) { %>
         <section id="show-page">
-            <a href="/budgets/<%= budget._id %>/edit">update</a>
             <div><span style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
             <div><span style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
+            <a href="/budgets/<%= budget._id %>/edit">update</a>
         </section>
 
         </br>

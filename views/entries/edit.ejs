@@ -2,7 +2,7 @@
     <% if (user) { %>
         <% if (user && user._id.equals(budget.userId)) { %>
         <form action="/entries/<%= entry._id %>?_method=PUT" method="POST">
-            <label>Amount:</label>
+            <label>Amount ($):</label>
             <input type="number" name="amount" value="<%= entry.amount %>">
             </br>
             <label>Date:</label>
