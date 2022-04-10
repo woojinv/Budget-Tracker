@@ -19,7 +19,6 @@ function create(req, res) {
         // save the budget. 
         budget.save(function(err) {
             // redirect to the budget's show page.
-            console.log(budget, "<<< This is the saved budget");
             res.redirect(`/budgets/${budget._id}`);
         });
     });

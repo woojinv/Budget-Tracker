@@ -34,12 +34,15 @@ function newBudget(req, res) {
 function create(req, res) {
     // create a new budget object
     const budget = new Budget(req.body);
+    console.log(req.user, "<<< This is the logged in user");
+    // if no user is logged in, redirect to the home page
+    if (!req.user) return res.redirect('/home');
     // Assign the logged in user's id to that budget
     budget.userId = req.user._id;
     budget.remaining = budget.budget;
     budget.save(function(err) {
         if (err) return res.redirect('/budgets/new');
-        res.redirect(`/budgets/${budget._id}`);
+        res.redirect(`/budgets`);
     })
 }
 
@@ -58,6 +61,7 @@ function show(req, res) {
 }
 
 function deleteBudget(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOneAndDelete(
         // ensure that the budget was created by the logged in user
         {_id: req.params.id, userId: req.user._id}, function(err) {
@@ -94,6 +98,7 @@ function update(req, res) {
 }
 
 function archive(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findById(req.params.id, function(err, budget) {
         budget.archived = true;
         budget.save();
