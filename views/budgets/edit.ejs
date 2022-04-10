@@ -3,10 +3,11 @@
         <% if (user && user._id.equals(budget.userId)) { %> 
             <form action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
                 <label>Name:</label>
-                <input type="text" name="name">
+                <input type="text" name="name" placeholder="<%= budget.name %>">
                 </br>
                 <label>Budget:</label>
-                <input type="number" name="budget" name="remaining">
+                <input type="number" name="budget" placeholder="<%= budget.budget %>">
+                </br>
                 <input type="submit" value="Update Budget">
             </form>
 

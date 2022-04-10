@@ -3,13 +3,13 @@
         <% if (user && user._id.equals(budget.userId)) { %>
         <form action="/entries/<%= entry._id %>?_method=PUT" method="POST">
             <label>Amount:</label>
-            <input type="number" name="amount">
+            <input type="number" name="amount" value="<%= entry.amount %>">
             </br>
             <label>Date:</label>
-            <input type="Date" name="date">
+            <input type="Date" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
             </br>
             <label>Description:</label>
-            <input type="text" name="description">
+            <input type="text" name="description" value="<%= entry.description %> ">
             </br>
             <input type="submit" value="Update Entry">
         </form>
