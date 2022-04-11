@@ -22,11 +22,15 @@
     <% if (user) { %> 
     
     <form id="new-budget" action="/budgets" method="POST">
-        <label>Name</label>
-        <input class="name" type="text" name="name" placeholder="Ex: March Groceries">
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="text" class="name form-control" id="exampleInputName" name="name" placeholder="Ex: March Groceries">
+        </div>
         </br>
-        <label>Budget $</label>
-        <input class="budget" type="number" name="budget" placeholder="Round to the dollar!">
+        <div class="form-group">
+            <label for="exampleInputBudget">Budget $</label>
+            <input type="number" class="budget form-control" id="exampleInputBudget" name="budget" placeholder="Round to the dollar!">
+        </div>
         </br>
         <button type="submit" class="btn btn-primary">Add Budget</button>
     </form>
