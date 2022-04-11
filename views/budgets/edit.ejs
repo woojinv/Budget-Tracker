@@ -22,11 +22,15 @@
     <% if (user) { %> 
         <% if (user && user._id.equals(budget.userId)) { %> 
             <form id="edit-budget" action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
-                <label>Name</label>
-                <input class="name" type="text" name="name" value="<%= budget.name %>">
+                <div class="form-group">
+                    <label for="exampleInputNameEdit">Name</label>
+                    <input type="text" class="name form-control" id="exampleInputNameEdit" name="name" value="<%= budget.name %>">
+                </div>
                 </br>
-                <label>Budget $</label>
-                <input class="budget" type="number" name="budget" value="<%= budget.budget %>">
+                <div class="form-group">
+                    <label for="exampleInputBudgetEdit">Budget $</label>
+                    <input type="number" class="budget form-control" id="exampleInputBudgetEdit" name="budget" value="<%= budget.budget %>">
+                </div>
                 </br>
                 <button type="submit" class="btn btn-primary">Update Budget</button>
             </form>
