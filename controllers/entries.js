@@ -8,6 +8,7 @@ module.exports = {
 }
 
 function create(req, res) {
+    if (!req.user) return res.redirect('/home');
     // find the budget with the id
     Budget.findById(req.params.id, function(err, budget) {
         // put req.body into the entries array of that budget. 
@@ -19,13 +20,13 @@ function create(req, res) {
         // save the budget. 
         budget.save(function(err) {
             // redirect to the budget's show page.
-            console.log(budget, "<<< This is the saved budget");
             res.redirect(`/budgets/${budget._id}`);
         });
     });
 }
 
 function deleteEntry(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
         if (!budget || err) return res.redirect(`/budgets/${budget._id}`);
         const entry = budget.entries.id(req.params.id);
@@ -39,6 +40,7 @@ function deleteEntry(req, res) {
 }
 
 function edit(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
         const entry = budget.entries.id(req.params.id);
         res.render('entries/edit', {
@@ -50,6 +52,7 @@ function edit(req, res) {
 }
 
 function update(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
         const entry = budget.entries.id(req.params.id);
         if (!budget.userId.equals(req.user._id)) return res.redirect(`/budgets/${budget._id}`);
