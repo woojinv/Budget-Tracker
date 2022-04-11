@@ -1,4 +1,60 @@
-#new-budget {
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-link {
+  color: white;
+}
+
+
+
+#home-page {
+  display: flex;
+  justify-content: center;
+  padding-top: 50%;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.table {
+  max-width: 95%;
+}
+
+.index-table {
+  display: grid;
+  grid-template-columns: 2fr 1fr 25px 71px;
+  align-items: center;
+  justify-items: center;
+}
+
+.index-items {
+  display: flex;
+  text-align: center;
+}
+
+.archived-table {
+  display: grid;
+  grid-template-columns: 2fr 1fr 25px 91px;
+  align-items: center;
+  justify-items: center;
+}
+
+
+h1 {
+  font-size: xx-large;
+  text-align: center;
+}
+
+#new-budget-button {
   display: flex;
   justify-content: center;
   align-items: center
@@ -15,8 +71,96 @@
   height: 30px;
 }
 
-.navbar {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+
+/* New Budget Form */
+
+#new-budget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.name {
+  text-align: center;
+}
+
+.budget {
+  text-align: center;
+}
+
+
+/* Edit Budget Form */
+#edit-budget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Show Page */
+#show-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#spent {
+  font-size: xx-large;
+}
+
+
+
+
+
+.amount {
+  grid-area: amount;
+  text-align: center;
+}
+
+.date {
+  grid-area: date;
+  text-align: center;
+}
+
+.description {
+  grid-area: description;
+  text-align: center;
+}
+
+.submit {
+  grid-area: submit;
+  display: flex;
+  justify-content: center;
+  max-width: fit-content;
+  justify-self: center;
+}
+
+#add-entry-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+  "amount date"
+  "description description"
+  "submit submit";
+}
+
+.entries-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 25px;
+  align-items: center;
+  justify-items: center;
+}
+
+#description {
+  text-align: center;
+}
+
+
+/* Edit Entry Form */
+#edit-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+

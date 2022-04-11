@@ -1,25 +1,45 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header') %> 
+
+        <% if (user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/budgets/<%= budget._id %>">Back</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        <% } else { %>
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <% } %> 
+            
+    </nav>
+    <main id="main">
+        <% if (user) { %>
+        <h1> <%= title %></h1>
+        <% } %>
+
+<!-- End of "header" partial-->
+
     <% if (user) { %>
         <% if (user && user._id.equals(budget.userId)) { %>
-        <form action="/entries/<%= entry._id %>?_method=PUT" method="POST">
-            <label>Amount ($):</label>
-            <input type="number" name="amount" value="<%= entry.amount %>">
+        <form id="edit-entry" action="/entries/<%= entry._id %>?_method=PUT" method="POST">
+            <label>Amount $</label>
+            <input class="amount" type="number" name="amount" value="<%= entry.amount %>">
             </br>
-            <label>Date:</label>
-            <input type="Date" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
+            <label>Date</label>
+            <input class="date" type="Date" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
             </br>
-            <label>Description:</label>
-            <input type="text" name="description" value="<%= entry.description %> ">
+            <label>Description</label>
+            <input class="description" type="text" name="description" value="<%= entry.description %> ">
             </br>
             <input type="submit" value="Update Entry">
         </form>
 
         <!-- Nav Bar on bottom of page -->
-        <div class="navbar">
+        <!-- <div class="navbar">
             <a href="/budgets/<%= budget._id %>">Back</a>
             <a href="/budgets">All</a>
             <a href="/budgets/archived">Archived</a>
-        </div>
+        </div> -->
         <% } %>
     <% } %>
 

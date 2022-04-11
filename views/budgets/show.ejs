@@ -1,24 +1,46 @@
 <%- include('../partials/header') %> 
+
+        <% if (user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/budgets">Current Budgets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        <% } else { %>
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <% } %> 
+            
+    </nav>
+    <main id="main">
+        <% if (user) { %>
+        <h1> <%= title %></h1>
+        <% } %>
+
+        <!-- end of "header" partial -->
+
     <% if (user && user._id.equals(budget.userId)) { %>
         <section id="show-page">
-            <div><span style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
-            <div><span style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
+            <div><span id="spent" style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+            <div><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
             <a href="/budgets/<%= budget._id %>/edit">update</a>
         </section>
 
         </br>
         <h2>Entries</h2>
-            <form id="add-entry-form" action="/budgets/<%= budget._id %>/entries" method="POST">
-                <input type="Number" name="amount" placeholder="Enter Amount">
-                <input type="date" name="date">
-                <input type="text" name="description" placeholder="Enter Description">
-                <input type="submit" value="Add Entry">
+            <form action="/budgets/<%= budget._id %>/entries" method="POST">
+                <div id="add-entry-form" >
+                    <input class="amount" type="Number" name="amount" placeholder="Enter Amount $">
+                    <input class="date" type="date" name="date">
+                    <input class="description" type="text" name="description" placeholder="Enter Description">
+                    <input class="submit" type="submit" value="Add Entry">
+                </div>
             </form>
         </br>
             <% if (budget.entries.length) { %> 
-            <table>
+            <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="entries-table">
                         <th>Amount</th>
                         <th>Date</th>
                         <th>Description</th>
@@ -29,10 +51,10 @@
 
                 <tbody>
                     <% budget.entries.forEach(e => { %>
-                        <tr>
+                        <tr class="entries-table">
                             <td><a href="/entries/<%= e._id %>/edit">$<%= e.amount %></a></td>
                             <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toISOString().slice(5, 10) %></a></td>
-                            <td><a href="/entries/<%= e._id %>/edit"><%= e.description %></a></td>
+                            <td id="description"><a href="/entries/<%= e._id %>/edit"><%= e.description %></a></td>
                             <td>
                                 <form action="/entries/<%= e._id %>?_method=DELETE" method="POST">
                                     <button type="submit">X</button>
@@ -45,11 +67,6 @@
             <% } else { %> 
                 <h5>No Entries Yet</h5>
             <% } %> 
-        <!-- Nav Bar on bottom of page -->
-        <div class="navbar">
-            <a href="/budgets">All</a>
-            <a href="/budgets/archived">Archived</a>
-        </div>
 
     <% } %>
 
