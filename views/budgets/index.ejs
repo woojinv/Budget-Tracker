@@ -20,7 +20,8 @@
 
 
     <% if (user) { %> 
-    <a href="/budgets/new" id="new-budget-button">NEW BUDGET</a>
+        <button type="button" class="btn btn-primary btn-sm" id="new-budget-button"><a id="new-budget-link" href="/budgets/new">NEW BUDGET</a></button>
+    
     </div>
 
     <table class="table">
@@ -40,12 +41,12 @@
                     <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:red' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
-                            <button type="submit">X</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
                         </form>
                     </td>
                     <td>
                         <form action="/budgets/<%= b._id %>/archived?_method=PUT" method="POST">
-                            <button type="submit">Archive</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Archive</button>
                         </form>
                     </td>
                 </tr>

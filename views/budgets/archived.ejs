@@ -37,12 +37,12 @@
                     <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:red' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
-                            <button type="submit">X</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
                         </form>
                     </td>
                     <td>
                         <form action="/budgets/<%= b._id %>/unarchive?_method=PUT" method="POST">
-                            <button type="submit">Unarchive</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Unarchive</button>
                         </form>
                     </td>
                 </tr>

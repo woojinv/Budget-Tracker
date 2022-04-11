@@ -23,7 +23,7 @@
         <section id="show-page">
             <div><span id="spent" style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
             <div><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
-            <a href="/budgets/<%= budget._id %>/edit">update</a>
+            <button type="button" class="btn btn-outline-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">update</a></button>
         </section>
 
         </br>
@@ -33,7 +33,7 @@
                     <input class="amount" type="Number" name="amount" placeholder="Enter Amount $">
                     <input class="date" type="date" name="date">
                     <input class="description" type="text" name="description" placeholder="Enter Description">
-                    <input class="submit" type="submit" value="Add Entry">
+                    <button class="submit btn-primary btn-sm btn-block" type="submit">Add Entry</button>
                 </div>
             </form>
         </br>
@@ -57,7 +57,7 @@
                             <td id="description"><a href="/entries/<%= e._id %>/edit"><%= e.description %></a></td>
                             <td>
                                 <form action="/entries/<%= e._id %>?_method=DELETE" method="POST">
-                                    <button type="submit">X</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
                                 </form>
                             </td>
                         </tr>
