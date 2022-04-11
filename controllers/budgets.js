@@ -72,6 +72,7 @@ function deleteBudget(req, res) {
 }
 
 function edit(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOne({_id: req.params.id, userId: req.user._id}, function(err, budget) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
         res.render('budgets/edit', {
@@ -82,6 +83,7 @@ function edit(req, res) {
 }
 
 function update(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findOneAndUpdate(
         {_id: req.params.id, userId: req.user._id}, 
         // update object with updated properties
@@ -117,6 +119,7 @@ function indexArchived(req, res) {
 }
 
 function unarchive(req, res) {
+    if (!req.user) return res.redirect('/home');
     Budget.findById(req.params.id, function(err, budget) {
         budget.archived = false;
         budget.save();
