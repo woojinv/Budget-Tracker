@@ -23,8 +23,8 @@
     <table class="table">
         <thead>
             <tr class="archived-table">
-                <th>Name</th>
-                <th>Spent</th>
+                <th class="table-header">Name</th>
+                <th class="table-header">Spent</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -34,7 +34,7 @@
                 <% if (user && user._id.equals(b.userId) && b.archived === true) { %> 
                 <tr class="archived-table">
                     <td><a href="/budgets/<%= b._id %>"><span class="index-items"><%= b.name %></span></a></td>
-                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:red' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
+                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:rgb(219 63 74)' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
                             <button type="submit" class="btn btn-outline-danger btn-sm">X</button>

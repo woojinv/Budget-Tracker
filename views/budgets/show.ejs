@@ -21,9 +21,9 @@
 
     <% if (user && user._id.equals(budget.userId)) { %>
         <section id="show-page">
-            <div><span id="spent" style="<%= budget.spent > budget.budget ? 'color:red' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
-            <div><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:red' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
-            <button type="button" class="btn btn-outline-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">update</a></button>
+            <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+            <div id="remaining-container"><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:rgb(219 63 74)' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
+            <button type="button" class="btn btn-outline-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">Update</a></button>
         </section>
 
         </br>
@@ -47,9 +47,9 @@
             <table class="table">
                 <thead>
                     <tr class="entries-table">
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Description</th>
+                        <th class="table-header">Amount</th>
+                        <th class="table-header">Date</th>
+                        <th class="table-header">Description</th>
                         <th></th>
                     </tr>
                 </thead>
