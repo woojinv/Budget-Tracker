@@ -29,12 +29,18 @@
         </br>
         <h2>Entries</h2>
             <form action="/budgets/<%= budget._id %>/entries" method="POST">
-                <div id="add-entry-form" >
-                    <input class="amount" type="Number" name="amount" placeholder="Enter Amount $">
-                    <input class="date" type="date" name="date">
-                    <input class="description" type="text" name="description" placeholder="Enter Description">
-                    <button class="submit btn-primary btn-sm btn-block" type="submit">Add Entry</button>
-                </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <input class="amount form-control" type="Number" name="amount" placeholder="Enter Amount $">
+                        </div>
+                        <div class="col">
+                            <input class="date form-control" type="date" name="date">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <input class="description form-control" type="text" name="description" placeholder="Enter Description">
+                    </div>
+                        <button type="submit" class="btn btn-primary btn-sm col-12">Add Entry</button>
             </form>
         </br>
             <% if (budget.entries.length) { %> 
