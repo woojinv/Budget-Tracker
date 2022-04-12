@@ -68,16 +68,15 @@ async function show(req, res) {
   }
 }
 
-
 // Delete Budget
-function deleteBudget(req, res) {
-  if (!req.user) return res.redirect("/home");
-  Budget.findOneAndDelete(
-    { _id: req.params.id, userId: req.user._id }, // ensure that the budget was created by the logged in user
-    function (err) {
-      res.redirect("/budgets");
-    }
-  );
+async function deleteBudget(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    await Budget.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    res.redirect("/budgets");
+  } catch (err) {
+    res.redirect("/budgets");
+  }
 }
 
 // Display Page to Update a Budget
