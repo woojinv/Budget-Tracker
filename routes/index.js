@@ -1,18 +1,14 @@
 var router = require("express").Router();
 const passport = require("passport");
 
-// if url is localhost:3000, this redirects to localhost:3000/home
+// If url is localhost:3000, Redirect to localhost:3000/home
 router.get("/", function (req, res) {
   res.redirect("/home");
 });
 
-// renders our home page
+// Render Login Page
 router.get("/home", function (req, res) {
   res.render("home");
-  // Where do you want to go for the root route
-  // in the student demo this was res.redirect('/students'), what do you want?
-  // This could be a landing page, or just redirect to your main resource page which you'll have an a tag that makes
-  // a request to `/auth/google` route below
 });
 
 // Google OAuth login route
