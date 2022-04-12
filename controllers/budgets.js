@@ -40,11 +40,11 @@ function newBudget(req, res) {
 async function create(req, res) {
   try {
     const budget = await new Budget(req.body);
-    console.log(budget, "<<< this is the new budget")
     if (!req.user) return res.redirect("/home");
     budget.userId = await req.user._id;
     budget.remaining = await budget.budget;
-    budget.save();
+    await budget.save();
+
     res.redirect("/budgets")
   } catch (err) {
     res.redirect('/budgets/new');
@@ -52,19 +52,22 @@ async function create(req, res) {
 }
 
 // Display Page for Selected Budget
-function show(req, res) {
-  Budget.findById(req.params.id, function (err, budget) {
-    budget.entries.sort((a, b) => { // Display Entries By Descending Date
-      return b.date - a.date;
-    });
-    budget.save();
+async function show(req, res) {
+  try {
+    const budget = await Budget.findById(req.params.id);
+    await budget.entries.sort((a, b) => b.date - a.date);
+    await budget.save();
+
     res.render("budgets/show", {
       title: budget.name,
       budget,
-      remaining: budget.budget,
-    });
-  });
+      remaining: budget.budget
+    })
+  } catch (err) {
+    res.redirect("/budgets");
+  }
 }
+
 
 // Delete Budget
 function deleteBudget(req, res) {
