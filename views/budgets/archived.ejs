@@ -1,52 +1,71 @@
-<%- include('../partials/header') %> 
+<%- include('../partials/header') %>
+    <!-- If user is logged in, display nav bar -->
+    <% if (user) { %>
+        <!-- Current Budgets Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="/budgets">Current Budgets</a>
+        </li>
 
-        <% if (user) { %>
-            <li class="nav-item">
-                <a class="nav-link" href="/budgets">Current Budgets</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-        <% } else { %>
-            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %> 
-            
+        <!-- Log Out Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+
+    <!-- else, redirect to home page -->
+    <% } else { %>
+        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+    <% } %>    
     </nav>
+
     <main id="main">
         <% if (user) { %>
-        <h1> <%= title %></h1>
+            <!-- Archived Budgets -->
+            <h1> <%= title %></h1>
         <% } %>
 
-    <% if (user) { %> 
-    <table class="table">
-        <thead>
-            <tr class="archived-table">
-                <th class="table-header">Name</th>
-                <th class="table-header">Spent</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <% budgets.forEach(b => { %>
-                <% if (user && user._id.equals(b.userId) && b.archived === true) { %> 
-                <tr class="archived-table">
-                    <td><a href="/budgets/<%= b._id %>"><span class="index-items"><%= b.name %></span></a></td>
-                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:rgb(219 63 74)' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
-                    <td>
-                        <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="/budgets/<%= b._id %>/unarchive?_method=PUT" method="POST">
-                            <button type="submit" class="btn btn-outline-secondary btn-sm">Unarchive</button>
-                        </form>
-                    </td>
-                </tr>
-                <% } %> 
-            <% }) %> 
-        </tbody>
-    </table>
-    <% } %> 
+        <% if (user) { %> 
+            <!-- Table of Archived Budgets -->
+            <table class="table">
+                <!-- Table Headers -->
+                <thead>
+                    <tr class="archived-table">
+                        <th class="table-header">Name</th>
+                        <th class="table-header">Spent</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <!-- Table Contents -->
+                <tbody>
+                    <!-- Loop Through All Budgets -->
+                    <% budgets.forEach(b => { %>
+                        <!-- Checking if Logged In User is User who Created Budgets, and Display Archived Budgets -->
+                        <% if (user && user._id.equals(b.userId) && b.archived === true) { %> 
+                            <tr class="archived-table">
+                                <!-- Name -->
+                                <td><a href="/budgets/<%= b._id %>"><span class="index-items"><%= b.name %></span></a></td>
+
+                                <!-- Amount, Displayed as Red if Exceeded -->
+                                <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:rgb(219 63 74)' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
+                                
+                                <!-- Delete Button -->
+                                <td>
+                                    <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
+                                    </form>
+                                </td>
+                                
+                                <!-- Unarchive Button -->
+                                <td>
+                                    <form action="/budgets/<%= b._id %>/unarchive?_method=PUT" method="POST">
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm">Unarchive</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% } %> 
+                    <% }) %> 
+                </tbody>
+            </table>                    
+        <% } %> 
 <%- include('../partials/footer') %> 

@@ -44,7 +44,7 @@ function edit(req, res) {
     Budget.findOne({'entries._id': req.params.id}, function(err, budget) {
         const entry = budget.entries.id(req.params.id);
         res.render('entries/edit', {
-            title: 'Edit Entry',
+            title: 'Update Entry',
             budget,
             entry
         });
