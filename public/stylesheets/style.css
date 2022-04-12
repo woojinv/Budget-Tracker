@@ -10,11 +10,19 @@
     padding-top: 50%;
   }
 
+  #login-button:hover > a {
+    color: white;
+  }
+  
   .login {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 34px;
+  }
+
+  .login:hover {
+    color: white;
   }
   
   img {
@@ -102,7 +110,11 @@
     text-align: center;
   }
 
-  #update-button-link {
+  #update-button-button:hover > a {
+    color: white;
+  }
+
+  #update-button-link:hover {
     color: white;
   }
 
