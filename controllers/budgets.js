@@ -14,17 +14,29 @@ module.exports = {
 };
 
 // Display Current Budgets
-function index(req, res) {
-Budget.find({})
-    .sort({ updatedAt: "desc" }) // Sort Budgets with Most Recently Updated at Top
-    .exec(function (err, budgets) {
-    if (err) return res.redirect("/home");
+async function index(req, res) {
+  try {
+    const budgets = await Budget.find({}).sort({ updatedAt: "desc" }).exec();
     res.render("budgets/index", {
-        title: "Current Budgets",
-        budgets,
+      title: "Current Budgets",
+      budgets
     });
-    });
+  } catch (err) {
+    res.redirect("/home");
+  }
 }
+
+// function index(req, res) {
+// Budget.find({})
+//     .sort({ updatedAt: "desc" }) // Sort Budgets with Most Recently Updated at Top
+//     .exec(function (err, budgets) {
+//     if (err) return res.redirect("/home");
+//     res.render("budgets/index", {
+//         title: "Current Budgets",
+//         budgets,
+//     });
+//     });
+// }
 
 // Render Form to Create New Budget
 function newBudget(req, res) {
