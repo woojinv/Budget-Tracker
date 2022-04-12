@@ -17,17 +17,15 @@
         <h1> <%= title %></h1>
         <% } %>
 
-<!-- end of "header" partial view -->
-
     <% if (user) { %> 
     
     <form id="new-budget" action="/budgets" method="POST">
-        <div class="form-group">
+        <div class="form-group form-label">
             <label for="exampleInputName">Name</label>
             <input type="text" class="name form-control" id="exampleInputName" name="name" placeholder="Ex: March Groceries">
         </div>
         </br>
-        <div class="form-group">
+        <div class="form-group form-label">
             <label for="exampleInputBudget">Budget $</label>
             <input type="number" class="budget form-control" id="exampleInputBudget" name="budget" placeholder="Round to the Dollar!">
         </div>

@@ -1,200 +1,196 @@
 * {
   font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
+/* Home Page */
+  #home-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 50%;
+  }
 
-.nav-link {
-  color: white;
-}
-
-
-
-
-#home-page {
-  display: flex;
-  justify-content: center;
-  padding-top: 50%;
-}
-
-#main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+  }
+  
+  img {
+    height: 30px;
+  }
 
 
-.table {
-  max-width: 95%;
-}
+/* Current Budgets (Index) and Archived Budgets Page */
+  a {
+    text-decoration: none;
+  }
 
-.index-table {
-  display: grid;
-  grid-template-columns: 2fr 1fr 25px 71px;
-  align-items: center;
-  justify-items: center;
-}
+  .nav-link {
+    color: white;
+  }
 
-.index-items {
-  display: flex;
-  text-align: center;
-}
+  #main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.archived-table {
-  display: grid;
-  grid-template-columns: 2fr 1fr 25px 91px;
-  align-items: center;
-  justify-items: center;
-}
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 5%;
+  }
+
+  h1 {
+    font-size: xx-large;
+    text-align: center;
+    margin-top: 5%;
+  }
+
+  #new-budget-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+  }
+
+  #new-budget-link {
+    display: flex;
+    color: white;
+  }
+
+  .table {
+    max-width: 95%;
+  }
+
+  .index-table {
+    display: grid;
+    grid-template-columns: 2fr 1fr 25px 71px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .table-header {
+    font-size: larger;
+  }
+
+  .index-items {
+    display: flex;
+    text-align: center;
+  }
+
+  .archived-table {
+    display: grid;
+    grid-template-columns: 2fr 1fr 25px 91px;
+    align-items: center;
+    justify-items: center;
+  }
 
 
-h1 {
-  font-size: xx-large;
-  text-align: center;
-  margin-top: 5%;
-}
+/* New Budget Page */
+  #new-budget {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-#new-budget-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
-}
+  .name {
+    text-align: center;
+  }
 
-#new-budget-link {
-  display: flex;
-  color: white;
-}
+  .budget {
+    text-align: center;
+  }
 
-.head {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin-bottom: 5%;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-}
-
-img {
-  height: 30px;
-}
+  .form-label {
+    text-align: center;
+  }
 
 
-/* New Budget Form */
+/* Show Page */
+  #show-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+  }
 
-#new-budget {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
+  #spent {
+    text-align: center;
+  }
 
-.name {
-  text-align: center;
-}
+  #spent-amount {
+    font-size: xx-large;
+  }
 
-.budget {
-  text-align: center;
-}
+  #remaining-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .amount {
+    grid-area: amount;
+    text-align: center;
+  }
+
+  .date {
+    grid-area: date;
+    text-align: center;
+  }
+
+  .description {
+    grid-area: description;
+    text-align: center;
+  }
+
+  .submit {
+    grid-area: submit;
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-row {
+    display: flex;
+  }
+
+  .entries-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 25px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  #description {
+    text-align: center;
+  }
 
 
 /* Edit Budget Form */
-#edit-budget {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-/* Show Page */
-#show-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-}
-
-#spent {
-  text-align: center;
-}
-
-#spent-amount {
-  font-size: xx-large;
-}
-
-#remaining-container {
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
-#update-button-link {
-  /* color: white; */
-}
-
-
-
-.amount {
-  grid-area: amount;
-  text-align: center;
-}
-
-.date {
-  grid-area: date;
-  text-align: center;
-}
-
-.description {
-  grid-area: description;
-  text-align: center;
-}
-
-.submit {
-  grid-area: submit;
-  display: flex;
-  justify-content: center;
-}
-
-/* #add-entry-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: 
-  "amount date"
-  "description description"
-  "submit submit";
-} */
-
-.form-row {
-  display: flex;
-}
-
-
-
-.entries-table {
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr 25px;
-  align-items: center;
-  justify-items: center;
-}
-
-#description {
-  text-align: center;
-}
+  #edit-budget {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
 
 /* Edit Entry Form */
-#edit-entry {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
+  #edit-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
 
-.table-header {
-  font-size:larger;
+/* Media Queries */
+/* Tablets */
+@media only screen and (min-width: 768px) {
+  #edit-budget {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: -webkit-fill-available;
+  }
 }

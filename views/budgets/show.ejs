@@ -17,8 +17,6 @@
         <h1> <%= title %></h1>
         <% } %>
 
-        <!-- end of "header" partial -->
-
     <% if (user && user._id.equals(budget.userId)) { %>
         <section id="show-page">
             <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
@@ -73,7 +71,5 @@
             <% } else { %> 
                 <h5>No Entries Yet</h5>
             <% } %> 
-
     <% } %>
-
 <%- include('../partials/footer') %>  

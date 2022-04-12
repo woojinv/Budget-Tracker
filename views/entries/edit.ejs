@@ -17,35 +17,26 @@
         <h1> <%= title %></h1>
         <% } %>
 
-<!-- End of "header" partial-->
-
     <% if (user) { %>
         <% if (user && user._id.equals(budget.userId)) { %>
         <form id="edit-entry" action="/entries/<%= entry._id %>?_method=PUT" method="POST">
-            <div class="form-group">
+            <div class="form-group form-label">
                 <label for="exampleInputAmount">Amount $</label>
                 <input type="number" class="amount form-control" id="exampleInputAmount" name="amount" value="<%= entry.amount %>">
             </div>
             </br>
-            <div class="form-group">
+            <div class="form-group form-label">
                 <label for="exampleInputEntryDate">Date</label>
                 <input type="date" class="date form-control" id="exampleInputEntryDate" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
             </div>
             </br>
-            <div class="form-group">
+            <div class="form-group form-label">
                 <label for="exampleInputEntryDescription">Description</label>
                 <input type="text" class="description form-control" id="exampleInputEntryDescription" name="description" value="<%= entry.description %> ">
             </div>
             </br>
             <button type="submit" class="btn btn-primary">Update Entry</button>
         </form>
-
-        <!-- Nav Bar on bottom of page -->
-        <!-- <div class="navbar">
-            <a href="/budgets/<%= budget._id %>">Back</a>
-            <a href="/budgets">All</a>
-            <a href="/budgets/archived">Archived</a>
-        </div> -->
         <% } %>
     <% } %>
 
