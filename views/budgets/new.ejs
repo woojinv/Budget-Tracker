@@ -1,19 +1,40 @@
-<%- include('../partials/header') %>
+<%- include('../partials/header') %> 
+
+        <% if (user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/budgets">Current Budgets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        <% } else { %>
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <% } %> 
+            
+    </nav>
+    <main id="main">
+        <% if (user) { %>
+        <h1> <%= title %></h1>
+        <% } %>
+
+<!-- end of "header" partial view -->
+
     <% if (user) { %> 
-    <form action="/budgets" method="POST">
-        <label>Name:</label>
-        <input type="text" name="name" placeholder="Ex: March Groceries">
+    
+    <form id="new-budget" action="/budgets" method="POST">
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="text" class="name form-control" id="exampleInputName" name="name" placeholder="Ex: March Groceries">
+        </div>
         </br>
-        <label>Budget ($):</label>
-        <input type="number" name="budget" placeholder="Round to the dollar!">
+        <div class="form-group">
+            <label for="exampleInputBudget">Budget $</label>
+            <input type="number" class="budget form-control" id="exampleInputBudget" name="budget" placeholder="Round to the Dollar!">
+        </div>
         </br>
-        <input type="submit" value="Add Budget">
+        <button type="submit" class="btn btn-primary">Add Budget</button>
     </form>
 
-    <!-- Nav Bar on bottom of page -->
-    <div class="navbar">
-        <a href="/budgets">All</a>
-        <a href="/budgets/archived">Archived</a>
-    </div>
+
     <% } %> 
 <%- include('../partials/footer') %> 

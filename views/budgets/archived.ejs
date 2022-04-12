@@ -1,10 +1,30 @@
 <%- include('../partials/header') %> 
+
+        <% if (user) { %>
+            <li class="nav-item">
+                <a class="nav-link" href="/budgets">Current Budgets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+            </li>
+        <% } else { %>
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <% } %> 
+            
+    </nav>
+    <main id="main">
+        <% if (user) { %>
+        <h1> <%= title %></h1>
+        <% } %>
+
+<!-- endof "header" partial view -->
+
     <% if (user) { %> 
-    <table>
+    <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Spent</th>
+            <tr class="archived-table">
+                <th class="table-header">Name</th>
+                <th class="table-header">Spent</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -12,17 +32,17 @@
         <tbody>
             <% budgets.forEach(b => { %>
                 <% if (user && user._id.equals(b.userId) && b.archived === true) { %> 
-                <tr>
-                    <td><a href="/budgets/<%= b._id %>"><%= b.name %></a></td>
-                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:red' : 'color:green' %>">$<%= b.spent %></a></td>
+                <tr class="archived-table">
+                    <td><a href="/budgets/<%= b._id %>"><span class="index-items"><%= b.name %></span></a></td>
+                    <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:rgb(219 63 74)' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
                     <td>
                         <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
-                            <button type="submit">X</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
                         </form>
                     </td>
                     <td>
                         <form action="/budgets/<%= b._id %>/unarchive?_method=PUT" method="POST">
-                            <button type="submit">Unarchive</button>
+                            <button type="submit" class="btn btn-outline-secondary btn-sm">Unarchive</button>
                         </form>
                     </td>
                 </tr>
@@ -32,8 +52,8 @@
     </table>
 
     <!-- Nav Bar on bottom of page -->
-    <div class="navbar">
+    <!-- <div class="navbar">
         <a href="/budgets">All</a>
-    </div>
+    </div> -->
     <% } %> 
 <%- include('../partials/footer') %> 

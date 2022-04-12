@@ -19,7 +19,7 @@ function index(req, res) {
     Budget.find({}).sort({ updatedAt: 'desc'}).exec(function(err, budgets) {
         if (err) return res.redirect('/home');
         res.render('budgets/index', {
-            title: 'All Budgets',
+            title: 'Current Budgets',
             budgets
         });
     });
@@ -76,7 +76,7 @@ function edit(req, res) {
     Budget.findOne({_id: req.params.id, userId: req.user._id}, function(err, budget) {
         if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
         res.render('budgets/edit', {
-            title: "Edit Budget",
+            title: 'Edit Budget',
             budget
         })
     })
