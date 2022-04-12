@@ -21,7 +21,7 @@
         <section id="show-page">
             <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
             <div id="remaining-container"><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:rgb(219 63 74)' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
-            <button type="button" class="btn btn-outline-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">Update</a></button>
+            <button type="button" class="btn btn-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">Update Budget</a></button>
         </section>
 
         </br>
