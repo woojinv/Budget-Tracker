@@ -16,7 +16,10 @@ module.exports = {
 // Display Current Budgets
 async function index(req, res) {
   try {
-    const budgets = await Budget.find({}).sort({ updatedAt: "desc" }).exec();
+    const budgets = await Budget.find({})
+                                .sort({ updatedAt: "desc" })
+                                .exec();
+
     res.render("budgets/index", {
       title: "Current Budgets",
       budgets
@@ -26,18 +29,6 @@ async function index(req, res) {
   }
 }
 
-// function index(req, res) {
-// Budget.find({})
-//     .sort({ updatedAt: "desc" }) // Sort Budgets with Most Recently Updated at Top
-//     .exec(function (err, budgets) {
-//     if (err) return res.redirect("/home");
-//     res.render("budgets/index", {
-//         title: "Current Budgets",
-//         budgets,
-//     });
-//     });
-// }
-
 // Render Form to Create New Budget
 function newBudget(req, res) {
   res.render("budgets/new", {
@@ -46,15 +37,18 @@ function newBudget(req, res) {
 }
 
 // Create New Budget
-function create(req, res) {
-  const budget = new Budget(req.body); 
-  if (!req.user) return res.redirect("/home"); 
-  budget.userId = req.user._id; // Assign the Logged In User's id to the Created Budget
-  budget.remaining = budget.budget; // Assign Initial Budget Value to Remaining Property
-  budget.save(function (err) {
-    if (err) return res.redirect("/budgets/new");
-    res.redirect(`/budgets`);
-  });
+async function create(req, res) {
+  try {
+    const budget = await new Budget(req.body);
+    console.log(budget, "<<< this is the new budget")
+    if (!req.user) return res.redirect("/home");
+    budget.userId = await req.user._id;
+    budget.remaining = await budget.budget;
+    budget.save();
+    res.redirect("/budgets")
+  } catch (err) {
+    res.redirect('/budgets/new');
+  }
 }
 
 // Display Page for Selected Budget
