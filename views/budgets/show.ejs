@@ -13,7 +13,9 @@
     
     <!-- else, redirect to home page -->
     <% } else { %>
-        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        <button type="button" class="btn btn-outline-primary" id="login-button">
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"/></a>
+        </button>
     <% } %>       
     </nav>
 
@@ -33,7 +35,7 @@
                 <div id="remaining-container"><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:rgb(219 63 74)' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
 
                 <!-- Update Budget Button -->
-                <button type="button" class="btn btn-primary btn-sm"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">Update Budget</a></button>
+                <button type="button" class="btn btn-outline-primary btn-sm" id="update-button-button"><a id="update-button-link" href="/budgets/<%= budget._id %>/edit">Update Budget</a></button>
             </section>
             </br>
 
