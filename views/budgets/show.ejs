@@ -28,12 +28,15 @@
         <!-- Checking if Logged In User is User who Created Budget -->
         <% if (user && user._id.equals(budget.userId)) { %>
             <section id="show-page">
+                <!-- Display both spent and earned if spent is > 0 -->
                 <% if (budget.earned > 0) { %>
                 <div id="spent-earned-container">
                     <!-- Spent, Displays as Red if Over Budget-->
                     <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
                     <div id="earned"><span id="earned-amount" style="<%= budget.earned > budget.spent ? 'color:rgb(36 157 60)' : 'color:black'%>">$<%= budget.earned %></span> earned</div>
                 </div>
+
+                <!-- Else, only display spent -->
                 <% } else if (budget.earned <= 0) { %>
                         <!-- Spent, Displays as Red if Over Budget-->
                         <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
@@ -105,7 +108,7 @@
                         <% budget.entries.forEach(e => { %>
                             <tr class="entries-table">
                                 <!-- Entry Amount -->
-                                <td><a href="/entries/<%= e._id %>/edit">$<%= e.amount %></a></td>
+                                <td><a href="/entries/<%= e._id %>/edit"><%= e.isIncome ? '+' : '-' %>$<%= e.amount %></a></td>
 
                                 <!-- Entry Date (MM-DD)-->
                                 <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toISOString().slice(5, 10) %></a></td>
