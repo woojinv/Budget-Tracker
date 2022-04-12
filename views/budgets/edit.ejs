@@ -1,46 +1,50 @@
 <%- include('../partials/header') %> 
+    <!-- If user is logged in, display nav bar -->
+    <% if (user) { %>
+        <!-- Back to Current Budget Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="/budgets/<%= budget._id %>">Back</a>
+        </li>
 
-        <% if (user) { %>
-            <li class="nav-item">
-                <a class="nav-link" href="/budgets/<%= budget._id %>">Back</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-        <% } else { %>
-            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %> 
-            
+        <!-- Log Out Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+
+    <!-- else, redirect to home page -->
+    <% } else { %>
+        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+    <% } %>
     </nav>
+
     <main id="main">
         <% if (user) { %>
-        <h1> <%= title %></h1>
+            <!-- Update Budget-->
+            <h1> <%= title %></h1>
         <% } %>
 
-    <!-- End of "header" partial -->
+        <% if (user) { %>
+            <!-- Checking if Logged In User is User who is Updating Budget -->
+            <% if (user && user._id.equals(budget.userId)) { %> 
+                <!-- Form to Update Budget -->
+                <form id="edit-budget" action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
+                    <!-- Budget Name Input -->
+                    <div class="form-group form-label">
+                        <label for="exampleInputNameEdit">Name</label>
+                        <input type="text" class="name form-control" id="exampleInputNameEdit" name="name" value="<%= budget.name %>">
+                    </div>
+                    </br>
 
-    <% if (user) { %> 
-        <% if (user && user._id.equals(budget.userId)) { %> 
-            <form id="edit-budget" action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
-                <div class="form-group">
-                    <label for="exampleInputNameEdit">Name</label>
-                    <input type="text" class="name form-control" id="exampleInputNameEdit" name="name" value="<%= budget.name %>">
-                </div>
-                </br>
-                <div class="form-group">
-                    <label for="exampleInputBudgetEdit">Budget $</label>
-                    <input type="number" class="budget form-control" id="exampleInputBudgetEdit" name="budget" value="<%= budget.budget %>">
-                </div>
-                </br>
-                <button type="submit" class="btn btn-primary">Update Budget</button>
-            </form>
+                    <!-- Budget Amount Input -->
+                    <div class="form-group form-label">
+                        <label for="exampleInputBudgetEdit">Budget $</label>
+                        <input type="number" class="budget form-control" id="exampleInputBudgetEdit" name="budget" value="<%= budget.budget %>">
+                    </div>
+                    </br>
 
-            <!-- Nav Bar on bottom of page -->
-            <!-- <div class="navbar">
-                <a href="/budgets/<%= budget._id %>">Back</a>
-                <a href="/budgets">All</a>
-                <a href="/budgets/archived">Archived</a>
-            </div> -->
+                    <!-- Update Budget Button -->
+                    <button type="submit" class="btn btn-primary">Update Budget</button>
+                </form>
+            <% } %> 
         <% } %> 
-    <% } %> 
 <%- include('../partials/footer') %> 

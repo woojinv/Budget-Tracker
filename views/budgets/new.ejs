@@ -1,40 +1,47 @@
 <%- include('../partials/header') %> 
+ <!-- If user is logged in, display nav bar -->
+    <% if (user) { %>
+        <!-- Current Budgets Link-->
+        <li class="nav-item">
+            <a class="nav-link" href="/budgets">Current Budgets</a>
+        </li>
 
-        <% if (user) { %>
-            <li class="nav-item">
-                <a class="nav-link" href="/budgets">Current Budgets</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-        <% } else { %>
-            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        <% } %> 
-            
+        <!-- Log Out Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+    
+    <!-- else, redirect to home page -->
+    <% } else { %>
+        <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+    <% } %>
     </nav>
+
     <main id="main">
         <% if (user) { %>
-        <h1> <%= title %></h1>
+            <!-- New Budget -->
+            <h1> <%= title %></h1>
         <% } %>
 
-<!-- end of "header" partial view -->
+        <% if (user) { %> 
+            <!-- Form to Submit New Budget -->
+            <form id="new-budget" action="/budgets" method="POST">
+                <!-- Budget Name Input -->
+                <div class="form-group form-label">
+                    <label for="exampleInputName">Name</label>
+                    <input type="text" class="name form-control" id="exampleInputName" name="name" placeholder="Ex: March Groceries">
+                </div>
+                </br>
 
-    <% if (user) { %> 
-    
-    <form id="new-budget" action="/budgets" method="POST">
-        <div class="form-group">
-            <label for="exampleInputName">Name</label>
-            <input type="text" class="name form-control" id="exampleInputName" name="name" placeholder="Ex: March Groceries">
-        </div>
-        </br>
-        <div class="form-group">
-            <label for="exampleInputBudget">Budget $</label>
-            <input type="number" class="budget form-control" id="exampleInputBudget" name="budget" placeholder="Round to the Dollar!">
-        </div>
-        </br>
-        <button type="submit" class="btn btn-primary">Add Budget</button>
-    </form>
+                <!-- Budget Amount Input -->
+                <div class="form-group form-label">
+                    <label for="exampleInputBudget">Budget $</label>
+                    <input type="number" class="budget form-control" id="exampleInputBudget" name="budget" placeholder="Round to the Dollar!">
+                </div>
+                </br>
 
-
-    <% } %> 
+                <!-- Add Budget Button-->
+                <button type="submit" class="btn btn-primary">Add Budget</button>
+            </form>
+        <% } %> 
 <%- include('../partials/footer') %> 
