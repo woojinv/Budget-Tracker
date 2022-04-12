@@ -127,11 +127,26 @@
     align-items: stretch;
   }
 
-  #spent {
+  #spent-earned-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #spent, #earned {
     text-align: center;
   }
 
-  #spent-amount {
+  #spent {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #earned {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #spent-amount, #earned-amount {
     font-size: xx-large;
   }
 
@@ -242,7 +257,7 @@
     width: 371px;
   }
 
-  #spent-amount {
+  #spent-amount, #earned-amount {
     font-size: xxx-large;
   }
 

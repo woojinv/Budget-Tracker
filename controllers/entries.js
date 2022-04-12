@@ -94,23 +94,4 @@ async function update(req, res) {
     }
 }
 
-// async function update(req, res) {
-//     try {
-//         if (!req.user) return res.redirect("/home");
-//         const budget = await Budget.findOne({ "entries._id": req.params.id });
-//         const entry = await budget.entries.id(req.params.id);
-//         if (!budget.userId.equals(req.user._id)) return res.redirect(`/budgets/${budget._id}`);
-//         budget.spent = await budget.spent + (parseInt(req.body.amount) - entry.amount); // Update spent
-//         budget.remaining = await budget.remaining + (entry.amount - parseInt(req.body.amount)); // Update remaining
-//         entry.amount = await req.body.amount;
-//         entry.date = await req.body.date;
-//         entry.description = await req.body.description;
-//         await budget.save();
-//         console.log(entry.isIncome);
-//         res.redirect(`/budgets/${budget._id}`);
-
-//     } catch (err) {
-//         res.redirect(`/budgets/${req.params.id}`);
-//     }
-// }
 
