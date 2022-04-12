@@ -25,6 +25,7 @@ async function index(req, res) {
       title: "Current Budgets",
       budgets
     });
+
   } catch (err) {
     res.redirect("/home");
   }
@@ -46,8 +47,8 @@ async function create(req, res) {
     budget.userId = await req.user._id;
     budget.remaining = await budget.budget;
     await budget.save();
+    res.redirect("/budgets");
 
-    res.redirect("/budgets")
   } catch (err) {
     res.redirect('/budgets/new');
   }
@@ -60,12 +61,12 @@ async function show(req, res) {
     const budget = await Budget.findById(req.params.id);
     await budget.entries.sort((a, b) => b.date - a.date);
     await budget.save();
-
     res.render("budgets/show", {
       title: budget.name,
       budget,
       remaining: budget.budget
-    })
+    });
+
   } catch (err) {
     res.redirect("/budgets");
   }
@@ -77,6 +78,7 @@ async function deleteBudget(req, res) {
     if (!req.user) return res.redirect("/home");
     await Budget.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
     res.redirect("/budgets");
+
   } catch (err) {
     res.redirect("/budgets");
   }
@@ -92,6 +94,7 @@ async function edit(req, res) {
       title: "Update Budget",
       budget
     });
+
   } catch (err) {
     res.redirect(`/budgets/${req.params.id}`);
   }
@@ -110,8 +113,8 @@ async function update(req, res) {
 
     budget.remaining = await budget.budget - budget.spent;
     await budget.save();
-    
     res.redirect(`/budgets/${budget._id}`);
+
   } catch (err) {
     res.redirect(`/budgets/${budget._id}`);
   }
@@ -122,10 +125,10 @@ async function archive(req, res) {
   try {
     if (!req.user) return res.redirect("/home");
     const budget = await Budget.findById(req.params.id);
-    budget.archived = await true;
+    budget.archived = true;
     await budget.save();
-
     res.redirect("/budgets");
+
   } catch (err) {
     res.redirect("/budgets");
   }
@@ -142,6 +145,7 @@ async function indexArchived(req, res) {
       title: "Archived Budgets",
       budgets
     });
+
   } catch (err) {
     res.redirect("/budgets");
   }
@@ -153,11 +157,11 @@ async function unarchive(req, res) {
   try {
     if (!req.user) return res.redirect("/home");
     const budget = await Budget.findById(req.params.id);
-    budget.archived = await false;
+    budget.archived = false;
     await budget.save();
     res.redirect("/budgets/archived");
+
   } catch (err) {
     res.redirect("/budgets/archived");
   }
-  
 }
