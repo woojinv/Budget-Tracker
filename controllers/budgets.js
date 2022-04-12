@@ -118,14 +118,30 @@ async function update(req, res) {
 }
 
 // Archive Selected Budget
-function archive(req, res) {
-  if (!req.user) return res.redirect("/home");
-  Budget.findById(req.params.id, function (err, budget) {
-    budget.archived = true;
-    budget.save();
+async function archive(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    const budget = await Budget.findById(req.params.id);
+    budget.archived = await true;
+    await budget.save();
+
     res.redirect("/budgets");
-  });
+  } catch (err) {
+    res.redirect("/budgets");
+  }
 }
+
+
+
+
+// function archive(req, res) {
+//   if (!req.user) return res.redirect("/home");
+//   Budget.findById(req.params.id, function (err, budget) {
+//     budget.archived = true;
+//     budget.save();
+//     res.redirect("/budgets");
+//   });
+// }
 
 // Display Archived Budgets
 function indexArchived(req, res) {
