@@ -99,19 +99,22 @@ async function edit(req, res) {
 
 
 // Apply Changes Made to a Budget
-function update(req, res) {
-  if (!req.user) return res.redirect("/home");
-  Budget.findOneAndUpdate(
-    { _id: req.params.id, userId: req.user._id },
-    req.body,
-    { new: true },
-    function (err, budget) {
-      budget.remaining = budget.budget - budget.spent;
-      budget.save();
-      if (err || !budget) return res.redirect(`/budgets/${budget._id}`);
-      res.redirect(`/budgets/${budget._id}`);
-    }
-  );
+async function update(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    const budget = await Budget.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user._id },
+      req.body,
+      { new: true }
+      );
+
+    budget.remaining = await budget.budget - budget.spent;
+    await budget.save();
+    
+    res.redirect(`/budgets/${budget._id}`);
+  } catch (err) {
+    res.redirect(`/budgets/${budget._id}`);
+  }
 }
 
 // Archive Selected Budget
