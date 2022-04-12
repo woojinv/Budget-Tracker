@@ -31,7 +31,17 @@
 
                 <!-- Form to Update Entry -->
                 <form id="edit-entry" action="/entries/<%= entry._id %>?_method=PUT" method="POST">
-                    
+                    <div class="expenseIncomeRadioButtons">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="false" id="inlineRadioExpense" <%= entry.isIncome === false ? 'checked' : ''%>>
+                            <label class="form-check-label" for="inlineRadioExpense">Expense</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="true" id="inlineRadioIncome" <%= entry.isIncome === true ? 'checked' : ''%>>
+                            <label class="form-check-label" for="inlineRadioIncome">Income</label>
+                        </div>
+                    </div>
+
                     <!-- Entry Amount Input -->
                     <div class="form-group form-label">
                         <label for="exampleInputAmount">Amount $</label>
