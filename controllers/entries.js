@@ -37,12 +37,21 @@ async function deleteEntry(req, res) {
         const budget = await Budget.findOne({ "entries._id": req.params.id });
         if (!budget) return res.redirect(`/budgets/${budget._id}`);
         const entry = await budget.entries.id(req.params.id);
-        budget.spent = parseInt(budget.spent) - parseInt(entry.amount); // Update spent 
-        budget.remaining = parseInt(budget.remaining) + parseInt(entry.amount); // Update Remaining
-        await budget.entries.remove(req.params.id);
-        await budget.save();
-        res.redirect(`/budgets/${budget._id}`);
-
+        if (entry.isIncome === false) {
+            budget.spent = parseInt(budget.spent) - parseInt(entry.amount); // Update spent 
+            budget.remaining = parseInt(budget.remaining) + parseInt(entry.amount); // Update Remaining
+            await budget.entries.remove(req.params.id);
+            await budget.save();
+            console.log("deleting expense function working");
+            res.redirect(`/budgets/${budget._id}`);  
+        } else if (entry.isIncome === true) {
+            console.log("Deleting income function working");
+            budget.earned = parseInt(budget.earned) - parseInt(entry.amount); // Update earned;
+            budget.remaining = parseInt(budget.remaining) - parseInt(entry.amount); // Update remaining
+            await budget.entries.remove(req.params.id);
+            await budget.save();
+            res.redirect(`/budgets/${budget._id}`);  
+        }
     } catch (err) {
         res.redirect(`/budgets/${req.params.id}`);
     }
