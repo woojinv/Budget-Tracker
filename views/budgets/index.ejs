@@ -13,16 +13,13 @@
             
     </nav>
     <main id="main">
-    <div class="head">
         <% if (user) { %>
-        <h1> <%= title %></h1>
+        <h1 class="current-budgets-header"> <%= title %></h1>
         <% } %>
 
 
     <% if (user) { %> 
-        <button type="button" class="btn btn-primary btn-sm" id="new-budget-button"><a id="new-budget-link" href="/budgets/new">New Budget</a></button>
-    
-    </div>
+        <button type="button" class="btn btn-primary btn-sm current-budgets-header" id="new-budget-button"><a id="new-budget-link" href="/budgets/new">New Budget</a></button>
 
     <table class="table">
         <thead>

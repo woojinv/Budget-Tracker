@@ -37,13 +37,6 @@
     align-items: center;
   }
 
-  .head {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    margin-bottom: 5%;
-  }
-
   h1 {
     font-size: xx-large;
     text-align: center;
@@ -54,7 +47,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5%;
+
   }
 
   #new-budget-link {
@@ -129,6 +122,7 @@
   #remaining-container {
     margin-top: 5%;
     margin-bottom: 5%;
+    text-align:center;
   }
 
   .amount {
@@ -187,10 +181,130 @@
 /* Media Queries */
 /* Tablets */
 @media only screen and (min-width: 768px) {
-  #edit-budget {
+  h1 {
+    font-size: xxx-large;
+    text-align: center;
+    margin-top: 7%;
+  }
+
+  #home-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 25%;
+  }
+
+  #new-budget {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    width: -webkit-fill-available;
+    width: 371px;
+    margin-top: 5%;
   }
+
+  #new-budget-button {
+    width:371px;
+    font-size: larger;
+    margin-top: 3%;
+  }
+
+  .table {
+    max-width: 95%;
+    margin-top: 3%;
+  }
+  
+  #show-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 371px;
+  }
+
+  #spent-amount {
+    font-size: xxx-large;
+  }
+
+  #remaining-container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align:center;
+    font-size:larger;
+  }
+
+  #update-button-link {
+    font-size: larger;
+  }
+
+  #edit-budget {
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 371px;
+    margin-top: 5%;
+  }
+
+  #add-entry-button {
+    font-size: larger;
+  }
+
+  #edit-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 371px;
+    margin-top: 5%;
+  }
+}
+
+/* Laptop */
+@media only screen and (min-width: 1024px) {
+  
+  h1 {
+    font-size: xxx-large;
+    text-align: center;
+    max-width: 973px;
+    margin-top: 5%;
+  }
+
+  #new-budget-button {
+    width:371px;
+    font-size: larger;
+    margin-top: 1.5%;
+  }
+
+
+  .table {
+    width: 973px;
+  }
+
+  #home-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;
+  }
+
+  #new-budget {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 371px;
+    margin-top: 3%;
+  }
+
+  #edit-budget {
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 371px;
+    margin-top: 3%;
+  }
+
+  #edit-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 371px;
+    margin-top: 3%;
+  }
+
 }
