@@ -16,6 +16,7 @@ module.exports = {
 // Display Current Budgets
 async function index(req, res) {
   try {
+    if (!req.user) return res.redirect("/home");
     const budgets = await Budget.find({})
                                 .sort({ updatedAt: "desc" })
                                 .exec();
@@ -31,6 +32,7 @@ async function index(req, res) {
 
 // Render Form to Create New Budget
 function newBudget(req, res) {
+  if (!req.user) return res.redirect("/home");
   res.render("budgets/new", {
     title: "New Budget",
   });
@@ -39,8 +41,8 @@ function newBudget(req, res) {
 // Create New Budget
 async function create(req, res) {
   try {
-    const budget = await new Budget(req.body);
     if (!req.user) return res.redirect("/home");
+    const budget = await new Budget(req.body);
     budget.userId = await req.user._id;
     budget.remaining = await budget.budget;
     await budget.save();
@@ -54,6 +56,7 @@ async function create(req, res) {
 // Display Page for Selected Budget
 async function show(req, res) {
   try {
+    if (!req.user) return res.redirect("/home");
     const budget = await Budget.findById(req.params.id);
     await budget.entries.sort((a, b) => b.date - a.date);
     await budget.save();
@@ -80,19 +83,20 @@ async function deleteBudget(req, res) {
 }
 
 // Display Page to Update a Budget
-function edit(req, res) {
-  if (!req.user) return res.redirect("/home");
-  Budget.findOne(
-    { _id: req.params.id, userId: req.user._id },
-    function (err, budget) {
-      if (err || !budget) return res.redirect(`/budgets/${req.params.id}`);
-      res.render("budgets/edit", {
-        title: "Update Budget",
-        budget,
-      });
-    }
-  );
+async function edit(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    const budget = await Budget.findOne({_id: req.params.id, userId: req.user._id });
+    if (!budget) return res.redirect(`/budgets/${req.params.id}`);
+    res.render("budgets/edit", {
+      title: "Update Budget",
+      budget
+    });
+  } catch (err) {
+    res.redirect(`/budgets/${req.params.id}`);
+  }
 }
+
 
 // Apply Changes Made to a Budget
 function update(req, res) {
