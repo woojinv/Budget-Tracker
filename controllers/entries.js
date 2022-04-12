@@ -7,13 +7,12 @@ module.exports = {
   update,
 };
 
-// with isIncome option 
+// Create New Entry
 async function create(req, res) {
     try {
         if (!req.user) return res.redirect("/home");
         const budget = await Budget.findById(req.params.id);
         await budget.entries.push(req.body);
-        console.log(budget, "<<< Budget with new expense created");
         if (req.body.isIncome === "false") {
             budget.spent = parseInt(budget.spent) + parseInt(req.body.amount); // Update spent
             budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount); // Update remaining
@@ -24,33 +23,12 @@ async function create(req, res) {
             budget.earned = parseInt(budget.earned) + parseInt(req.body.amount); // Update earned
             budget.remaining = parseInt(budget.remaining) + parseInt(req.body.amount); // Update remaining
             await budget.save();
-            console.log(budget, "<<< This is the updated buget");
             res.redirect(`/budgets/${budget._id}`);
         }
-        
-        
-
     } catch (err) {
         res.redirect(`/budgets/${req.params.id}`);
     }
 }
-
-
-// Create New Entry
-// async function create(req, res) {
-//     try {
-//         if (!req.user) return res.redirect("/home");
-//         const budget = await Budget.findById(req.params.id);
-//         await budget.entries.push(req.body);
-//         budget.spent = parseInt(budget.spent) + parseInt(req.body.amount); // Update spent
-//         budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount); // Update remaining
-//         await budget.save();
-//         res.redirect(`/budgets/${budget._id}`)
-
-//     } catch (err) {
-//         res.redirect(`/budgets/${req.params.id}`);
-//     }
-// }
 
 // Delete Selected Entry 
 async function deleteEntry(req, res) {
