@@ -131,30 +131,22 @@ async function archive(req, res) {
   }
 }
 
-
-
-
-// function archive(req, res) {
-//   if (!req.user) return res.redirect("/home");
-//   Budget.findById(req.params.id, function (err, budget) {
-//     budget.archived = true;
-//     budget.save();
-//     res.redirect("/budgets");
-//   });
-// }
-
 // Display Archived Budgets
-function indexArchived(req, res) {
-  Budget.find({})
-    .sort({ updatedAt: "desc" }) // Sort Budgets with Most Recently Updated at Top
-    .exec(function (err, budgets) {
-      if (err) return res.redirect("/home");
-      res.render("budgets/archived", {
-        title: "Archived Budgets",
-        budgets,
-      });
+async function indexArchived(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    const budgets = await Budget.find({})
+                                .sort({ updatedAt: "desc"})
+                                .exec();
+    res.render("budgets/archived", {
+      title: "Archived Budgets",
+      budgets
     });
+  } catch (err) {
+    res.redirect("/budgets");
+  }
 }
+
 
 // Unarchive Selected Budget
 function unarchive(req, res) {
