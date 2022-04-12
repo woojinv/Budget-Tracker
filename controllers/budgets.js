@@ -112,6 +112,7 @@ async function update(req, res) {
       );
 
     budget.remaining = await budget.budget - budget.spent;
+    budget.remaining = await budget.budget + budget.earned;
     await budget.save();
     res.redirect(`/budgets/${budget._id}`);
 

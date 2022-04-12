@@ -42,6 +42,17 @@
             <h2>Entries</h2>
                 <!-- Form to Submit New Entry -->
                 <form action="/budgets/<%= budget._id %>/entries" method="POST">
+                    <div class="expenseIncomeRadioButtons">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="false" id="inlineRadioExpense" checked>
+                            <label class="form-check-label" for="inlineRadioExpense">Expense</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="true" id="inlineRadioIncome">
+                            <label class="form-check-label" for="inlineRadioIncome">Income</label>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <!-- Amount Input-->
                         <div class="col">

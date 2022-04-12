@@ -7,6 +7,7 @@ const entrySchema = new Schema(
     amount: Number,
     date: Date,
     description: String,
+    isIncome: { type: Boolean, default: false }
   },
   {
     timestamps: true,
@@ -21,8 +22,9 @@ const budgetSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: "User" }, // Referencing the User Documents
     spent: { type: Number, default: 0 },
     remaining: Number,
+    earned: { type: Number, default: 0 },
     entries: [entrySchema], // Embdedded Entries. Budget to Entry. One to Many.
-    archived: { type: Boolean, default: false },
+    archived: { type: Boolean, default: false }
   },
   {
     timestamps: true,
