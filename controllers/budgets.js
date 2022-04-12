@@ -149,11 +149,15 @@ async function indexArchived(req, res) {
 
 
 // Unarchive Selected Budget
-function unarchive(req, res) {
-  if (!req.user) return res.redirect("/home");
-  Budget.findById(req.params.id, function (err, budget) {
-    budget.archived = false;
-    budget.save();
+async function unarchive(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    const budget = await Budget.findById(req.params.id);
+    budget.archived = await false;
+    await budget.save();
     res.redirect("/budgets/archived");
-  });
+  } catch (err) {
+    res.redirect("/budgets/archived");
+  }
+  
 }
