@@ -87,7 +87,7 @@ h1 {
 #new-budget {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 .name {
@@ -103,7 +103,7 @@ h1 {
 #edit-budget {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 /* Show Page */
@@ -171,6 +171,6 @@ h1 {
 #edit-entry {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 

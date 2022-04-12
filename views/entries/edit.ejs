@@ -22,14 +22,20 @@
     <% if (user) { %>
         <% if (user && user._id.equals(budget.userId)) { %>
         <form id="edit-entry" action="/entries/<%= entry._id %>?_method=PUT" method="POST">
-            <label>Amount $</label>
-            <input class="amount" type="number" name="amount" value="<%= entry.amount %>">
+            <div class="form-group">
+                <label for="exampleInputAmount">Amount $</label>
+                <input type="number" class="amount form-control" id="exampleInputAmount" name="amount" value="<%= entry.amount %>">
+            </div>
             </br>
-            <label>Date</label>
-            <input class="date" type="Date" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
+            <div class="form-group">
+                <label for="exampleInputEntryDate">Date</label>
+                <input type="date" class="date form-control" id="exampleInputEntryDate" name="date" value="<%= entry.date.toISOString().slice(0, 10) %>">
+            </div>
             </br>
-            <label>Description</label>
-            <input class="description" type="text" name="description" value="<%= entry.description %> ">
+            <div class="form-group">
+                <label for="exampleInputEntryDescription">Description</label>
+                <input type="text" class="description form-control" id="exampleInputEntryDescription" name="description" value="<%= entry.description %> ">
+            </div>
             </br>
             <button type="submit" class="btn btn-primary">Update Entry</button>
         </form>
