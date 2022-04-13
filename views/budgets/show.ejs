@@ -108,7 +108,7 @@
                         <% budget.entries.forEach(e => { %>
                             <tr class="entries-table">
                                 <!-- Entry Amount -->
-                                <td><a href="/entries/<%= e._id %>/edit"><%= e.isIncome ? '+' : '-' %>$<%= e.amount %></a></td>
+                                <td><a href="/entries/<%= e._id %>/edit" style="<%= e.isIncome ? 'color:rgb(30 157 66)' : 'color:rgb(219 63 74)' %>""><%= e.isIncome ? '+' : '-' %>$<%= e.amount %></a></td>
 
                                 <!-- Entry Date (MM-DD)-->
                                 <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toISOString().slice(5, 10) %></a></td>

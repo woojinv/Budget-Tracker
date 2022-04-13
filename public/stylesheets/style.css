@@ -244,6 +244,16 @@
     margin-top: 3%;
   }
 
+  #spent {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  #earned {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
   .table {
     max-width: 95%;
     margin-top: 3%;
@@ -255,6 +265,12 @@
     justify-content: center;
     align-items: stretch;
     width: 371px;
+  }
+
+  #spent-earned-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 
   #spent-amount, #earned-amount {
