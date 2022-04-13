@@ -32,14 +32,14 @@
                 <% if (budget.earned > 0) { %>
                 <div id="spent-earned-container">
                     <!-- Spent, Displays as Red if Over Budget-->
-                    <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
-                    <div id="earned"><span id="earned-amount" style="<%= budget.earned > budget.spent ? 'color:rgb(36 157 60)' : 'color:black'%>">$<%= budget.earned %></span> earned</div>
+                    <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:rgb(49 104 248)'%>">$<%= budget.spent %></span> spent</div>
+                    <div id="earned"><span id="earned-amount" style="<%= budget.earned > budget.spent ? 'color:rgb(36 157 60)' : 'color:rgb(49 104 248)'%>">$<%= budget.earned %></span> earned</div>
                 </div>
 
                 <!-- Else, only display spent -->
                 <% } else if (budget.earned <= 0) { %>
                         <!-- Spent, Displays as Red if Over Budget-->
-                        <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+                        <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:rgb(49 104 248)'%>">$<%= budget.spent %></span> spent</div>
                 <% } %> 
                 <!-- Remaining, Displays as Green if over zero -->
                 <div id="remaining-container"><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:rgb(219 63 74)' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
@@ -72,7 +72,7 @@
 
                         <!-- Date Input -->
                         <div class="col">
-                            <input class="date form-control" type="date" name="date">
+                            <input class="date form-control" type="date" name="date" required>
                         </div>
                     </div>
 

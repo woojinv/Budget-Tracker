@@ -13,6 +13,7 @@ async function create(req, res) {
         if (!req.user) return res.redirect("/home");
         const budget = await Budget.findById(req.params.id);
         await budget.entries.push(req.body);
+        console.log(req.body, "<<< This is req.body");
         if (req.body.isIncome === "false") {
             budget.spent = parseInt(budget.spent) + parseInt(req.body.amount); // Update spent
             budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount); // Update remaining
