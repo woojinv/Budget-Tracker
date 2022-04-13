@@ -115,5 +115,3 @@ async function update(req, res) {
         res.redirect(`/budgets/${req.params.id}`);
     }
 }
-
-
