@@ -13,18 +13,21 @@ async function create(req, res) {
         if (!req.user) return res.redirect("/home");
         const budget = await Budget.findById(req.params.id);
         await budget.entries.push(req.body);
-        console.log(req.body, "<<< This is req.body");
+
+        // If Entry is an Expense
         if (req.body.isIncome === "false") {
             budget.spent = parseInt(budget.spent) + parseInt(req.body.amount); // Update spent
             budget.remaining = parseInt(budget.remaining) - parseInt(req.body.amount); // Update remaining
             await budget.save();
             res.redirect(`/budgets/${budget._id}`);
+        
+        // If Entry is Income
         } else if (req.body.isIncome === "true") {
-            console.log("else if statement firing");
             budget.earned = parseInt(budget.earned) + parseInt(req.body.amount); // Update earned
             budget.remaining = parseInt(budget.remaining) + parseInt(req.body.amount); // Update remaining
             await budget.save();
             res.redirect(`/budgets/${budget._id}`);
+
         }
     } catch (err) {
         res.redirect(`/budgets/${req.params.id}`);
@@ -38,15 +41,17 @@ async function deleteEntry(req, res) {
         const budget = await Budget.findOne({ "entries._id": req.params.id });
         if (!budget) return res.redirect(`/budgets/${budget._id}`);
         const entry = await budget.entries.id(req.params.id);
+
+        // If Entry is Expense
         if (entry.isIncome === false) {
             budget.spent = parseInt(budget.spent) - parseInt(entry.amount); // Update spent 
             budget.remaining = parseInt(budget.remaining) + parseInt(entry.amount); // Update Remaining
             await budget.entries.remove(req.params.id);
             await budget.save();
-            console.log("deleting expense function working");
             res.redirect(`/budgets/${budget._id}`);  
+
+        // If Entry is Income
         } else if (entry.isIncome === true) {
-            console.log("Deleting income function working");
             budget.earned = parseInt(budget.earned) - parseInt(entry.amount); // Update earned;
             budget.remaining = parseInt(budget.remaining) - parseInt(entry.amount); // Update remaining
             await budget.entries.remove(req.params.id);
@@ -64,10 +69,12 @@ async function edit(req, res) {
         if (!req.user) return res.redirect("/home");
         const budget = await Budget.findOne({ "entries._id": req.params.id });
         const entry = await budget.entries.id(req.params.id);
+        const avatar = await req.user.avatar;
         res.render("entries/edit", {
             title: "Update Entry",
             budget, 
-            entry
+            entry,
+            avatar
         });
 
     } catch (err) {
@@ -82,6 +89,8 @@ async function update(req, res) {
         const budget = await Budget.findOne({ "entries._id": req.params.id });
         const entry = await budget.entries.id(req.params.id);
         if (!budget.userId.equals(req.user._id)) return res.redirect(`/budgets/${budget._id}`);
+
+        // If Entry is Expense
         if (entry.isIncome === false) {
             budget.spent = await budget.spent + (parseInt(req.body.amount) - entry.amount); // Update spent
             budget.remaining = await budget.remaining + (entry.amount - parseInt(req.body.amount)); // Update remaining
@@ -90,6 +99,8 @@ async function update(req, res) {
             entry.description = await req.body.description;
             await budget.save();
             res.redirect(`/budgets/${budget._id}`);
+
+        // If Entry is Income
         } else if (entry.isIncome === true) {
             budget.earned = await budget.earned + (parseInt(req.body.amount) - entry.amount); // Update earned
             budget.remaining = await budget.remaining + (parseInt(req.body.amount) - entry.amount); // Update remaining
@@ -98,6 +109,7 @@ async function update(req, res) {
             entry.description = await req.body.description;
             await budget.save();
             res.redirect(`/budgets/${budget._id}`);
+
         }
     } catch (err) {
         res.redirect(`/budgets/${req.params.id}`);

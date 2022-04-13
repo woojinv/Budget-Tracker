@@ -21,10 +21,11 @@ async function index(req, res) {
     const budgets = await Budget.find({})
                                 .sort({ updatedAt: "desc" })
                                 .exec();
-
+    const avatar = await req.user.avatar;
     res.render("budgets/index", {
       title: "Current Budgets",
-      budgets
+      budgets,
+      avatar
     });
 
   } catch (err) {
@@ -35,8 +36,10 @@ async function index(req, res) {
 // Render Form to Create New Budget
 function newBudget(req, res) {
   if (!req.user) return res.redirect("/home");
+  const avatar = req.user.avatar;
   res.render("budgets/new", {
-    title: "New Budget",
+    title: "New Budget", 
+    avatar
   });
 }
 
@@ -60,12 +63,14 @@ async function show(req, res) {
   try {
     if (!req.user) return res.redirect("/home");
     const budget = await Budget.findById(req.params.id);
+    const avatar = await req.user.avatar;
     await budget.entries.sort((a, b) => b.date - a.date);
     await budget.save();
     res.render("budgets/show", {
       title: budget.name,
       budget,
-      remaining: budget.budget
+      remaining: budget.budget,
+      avatar
     });
 
   } catch (err) {
@@ -90,10 +95,12 @@ async function edit(req, res) {
   try {
     if (!req.user) return res.redirect("/home");
     const budget = await Budget.findOne({_id: req.params.id, userId: req.user._id });
+    const avatar = await req.user.avatar;
     if (!budget) return res.redirect(`/budgets/${req.params.id}`);
     res.render("budgets/edit", {
       title: "Update Budget",
-      budget
+      budget,
+      avatar
     });
 
   } catch (err) {
@@ -143,9 +150,12 @@ async function indexArchived(req, res) {
     const budgets = await Budget.find({})
                                 .sort({ updatedAt: "desc"})
                                 .exec();
+    
+    const avatar = await req.user.avatar;
     res.render("budgets/archived", {
       title: "Archived Budgets",
-      budgets
+      budgets,
+      avatar
     });
 
   } catch (err) {
