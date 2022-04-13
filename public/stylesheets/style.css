@@ -39,6 +39,11 @@
     color: white;
   }
 
+  #avatar {
+    border-radius: 50%;
+    height: 40px;
+  }
+
   #main {
     display: flex;
     flex-direction: column;
