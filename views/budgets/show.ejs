@@ -28,9 +28,19 @@
         <!-- Checking if Logged In User is User who Created Budget -->
         <% if (user && user._id.equals(budget.userId)) { %>
             <section id="show-page">
-                <!-- Spent, Displays as Red if Over Budget-->
-                <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+                <!-- Display both spent and earned if spent is > 0 -->
+                <% if (budget.earned > 0) { %>
+                <div id="spent-earned-container">
+                    <!-- Spent, Displays as Red if Over Budget-->
+                    <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+                    <div id="earned"><span id="earned-amount" style="<%= budget.earned > budget.spent ? 'color:rgb(36 157 60)' : 'color:black'%>">$<%= budget.earned %></span> earned</div>
+                </div>
 
+                <!-- Else, only display spent -->
+                <% } else if (budget.earned <= 0) { %>
+                        <!-- Spent, Displays as Red if Over Budget-->
+                        <div id="spent"><span id="spent-amount" style="<%= budget.spent > budget.budget ? 'color:rgb(219 63 74)' : 'color:black'%>">$<%= budget.spent %></span> spent</div>
+                <% } %> 
                 <!-- Remaining, Displays as Green if over zero -->
                 <div id="remaining-container"><span id="remaining" style="<%= budget.remaining > 0 ? 'color:green' : 'color:rgb(219 63 74)' %>">$<%= budget.remaining %></span> of $<%= budget.budget %> remaining</div>
 
@@ -42,6 +52,18 @@
             <h2>Entries</h2>
                 <!-- Form to Submit New Entry -->
                 <form action="/budgets/<%= budget._id %>/entries" method="POST">
+                    <!-- Expense or Income Radio Buttons -->
+                    <div class="expenseIncomeRadioButtons">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="false" id="inlineRadioExpense" checked>
+                            <label class="form-check-label" for="inlineRadioExpense">Expense</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="isIncome" value="true" id="inlineRadioIncome">
+                            <label class="form-check-label" for="inlineRadioIncome">Income</label>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <!-- Amount Input-->
                         <div class="col">
@@ -86,7 +108,7 @@
                         <% budget.entries.forEach(e => { %>
                             <tr class="entries-table">
                                 <!-- Entry Amount -->
-                                <td><a href="/entries/<%= e._id %>/edit">$<%= e.amount %></a></td>
+                                <td><a href="/entries/<%= e._id %>/edit" style="<%= e.isIncome ? 'color:rgb(30 157 66)' : 'color:rgb(219 63 74)' %>""><%= e.isIncome ? '+' : '-' %>$<%= e.amount %></a></td>
 
                                 <!-- Entry Date (MM-DD)-->
                                 <td><a href="/entries/<%= e._id %>/edit"><%= e.date.toISOString().slice(5, 10) %></a></td>

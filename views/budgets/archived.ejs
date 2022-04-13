@@ -32,7 +32,7 @@
                 <thead>
                     <tr class="archived-table">
                         <th class="table-header">Name</th>
-                        <th class="table-header">Spent</th>
+                        <th class="table-header">Remaining</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -49,11 +49,11 @@
                                 <td><a href="/budgets/<%= b._id %>"><span class="index-items"><%= b.name %></span></a></td>
 
                                 <!-- Amount, Displayed as Red if Exceeded -->
-                                <td><a href="/budgets/<%= b._id %>" style="<%= b.spent > b.budget ? 'color:rgb(219 63 74)' : 'color:green' %>"><span class="index-items">$<%= b.spent %></span></a></td>
+                                <td><a href="/budgets/<%= b._id %>" style="<%= b.remaining < 0 ? 'color:rgb(219 63 74)' : 'color:rgb(36	157	60)' %>"><span class="index-items">$<%= b.remaining %></span></a></td>
                                 
                                 <!-- Delete Button -->
                                 <td>
-                                    <form action="/budgets/<%= b._id %>?_method=DELETE" method="POST">
+                                    <form action="/budgets/archived/<%= b._id %>?_method=DELETE" method="POST">
                                         <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
                                     </form>
                                 </td>

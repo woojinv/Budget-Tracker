@@ -13,7 +13,7 @@
   #login-button:hover > a {
     color: white;
   }
-  
+
   .login {
     display: flex;
     justify-content: center;
@@ -127,11 +127,26 @@
     align-items: stretch;
   }
 
-  #spent {
+  #spent-earned-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #spent, #earned {
     text-align: center;
   }
 
-  #spent-amount {
+  #spent {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #earned {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  #spent-amount, #earned-amount {
     font-size: xx-large;
   }
 
@@ -139,6 +154,12 @@
     margin-top: 5%;
     margin-bottom: 5%;
     text-align:center;
+  }
+
+  .expenseIncomeRadioButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .amount {
@@ -223,6 +244,16 @@
     margin-top: 3%;
   }
 
+  #spent {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  #earned {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
   .table {
     max-width: 95%;
     margin-top: 3%;
@@ -236,7 +267,13 @@
     width: 371px;
   }
 
-  #spent-amount {
+  #spent-earned-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  #spent-amount, #earned-amount {
     font-size: xxx-large;
   }
 

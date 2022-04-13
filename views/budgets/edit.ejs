@@ -30,6 +30,7 @@
             <% if (user && user._id.equals(budget.userId)) { %> 
                 <!-- Form to Update Budget -->
                 <form id="edit-budget" action="/budgets/<%= budget._id %>?_method=PUT" method="POST">
+                    
                     <!-- Budget Name Input -->
                     <div class="form-group form-label">
                         <label for="exampleInputNameEdit">Name</label>

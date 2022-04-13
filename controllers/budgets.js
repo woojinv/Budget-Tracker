@@ -11,6 +11,7 @@ module.exports = {
   archive,
   indexArchived,
   unarchive,
+  deleteArchived
 };
 
 // Display Current Budgets
@@ -112,6 +113,7 @@ async function update(req, res) {
       );
 
     budget.remaining = await budget.budget - budget.spent;
+    budget.remaining = await budget.budget + budget.earned;
     await budget.save();
     res.redirect(`/budgets/${budget._id}`);
 
@@ -159,6 +161,18 @@ async function unarchive(req, res) {
     const budget = await Budget.findById(req.params.id);
     budget.archived = false;
     await budget.save();
+    res.redirect("/budgets/archived");
+
+  } catch (err) {
+    res.redirect("/budgets/archived");
+  }
+}
+
+// Delete Archived Budget
+async function deleteArchived(req, res) {
+  try {
+    if (!req.user) return res.redirect("/home");
+    await Budget.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
     res.redirect("/budgets/archived");
 
   } catch (err) {
