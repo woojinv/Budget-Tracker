@@ -37,6 +37,8 @@ MongoDB and Mongoose, Express, Node.js, Bootstrap, OAuth, Google People API, Atl
 
 - Consume a third party banking API to display updated account balances with withdrawals and deposits.
 
+- Expose API to manipulate data and entry objects.
+
 - Assign a category to each budget to display all budgets of a certain category.
 
 - Drag and drop budgets and entries to manually change their order. 
