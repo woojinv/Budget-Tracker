@@ -9,6 +9,8 @@ A minimalist budgeting app to kick-start your financial journey.
 
 3. Click on an entry to edit
 
+[Click to Get Started](https://ga-budget-tracker.herokuapp.com/home)
+
 </br>
 
 # Screenshots
@@ -26,14 +28,6 @@ Backend: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
 Authentication: OAuth, Google People API
 
 Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
-
-</br>
-
-# Getting Started
-
-[Budget Tracker](https://ga-budget-tracker.herokuapp.com/home)
-
-[Kanban View of Project's Planning](https://www.notion.so/7c090a9165ff4a4aac6c907ff300f410?v=bc7533cdaa3a4ea28826f536497d1376)
 
 </br>
 
