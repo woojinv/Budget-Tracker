@@ -9,7 +9,7 @@ A minimalist budgeting app to kick-start your financial journey from your phone 
 
 3. Click on an entry to edit
 
-[Click to Get Started](https://ga-budget-tracker.herokuapp.com/home)
+Click [Here](https://ga-budget-tracker.herokuapp.com/home) to start tracking!
 
 </br>
 
