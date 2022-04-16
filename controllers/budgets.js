@@ -48,8 +48,8 @@ async function create(req, res) {
   try {
     if (!req.user) return res.redirect("/home");
     const budget = await new Budget(req.body);
-    budget.userId = await req.user._id;
-    budget.remaining = await budget.budget;
+    budget.userId = req.user._id;
+    budget.remaining = budget.budget;
     await budget.save();
     res.redirect("/budgets");
 
@@ -108,7 +108,6 @@ async function edit(req, res) {
   }
 }
 
-
 // Apply Changes Made to a Budget
 async function update(req, res) {
   try {
@@ -119,7 +118,7 @@ async function update(req, res) {
       { new: true }
       );
 
-    budget.remaining = await budget.budget - budget.spent;
+    budget.remaining = await  budget.budget - budget.spent;
     budget.remaining = await budget.budget + budget.earned;
     await budget.save();
     res.redirect(`/budgets/${budget._id}`);
@@ -162,7 +161,6 @@ async function indexArchived(req, res) {
     res.redirect("/budgets");
   }
 }
-
 
 // Unarchive Selected Budget
 async function unarchive(req, res) {
