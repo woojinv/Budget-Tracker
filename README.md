@@ -1,7 +1,7 @@
 
 # Budget Tracker
 
-A minimalist budgeting app to kick-start your financial journey. 
+A minimalist budgeting app to kick-start your financial journey from your phone or desktop!
 
 1. Create a new budget
 
