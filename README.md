@@ -21,7 +21,11 @@ A minimalist budgeting app to kick-start your financial journey.
 
 # Technologies Used
 
-MongoDB and Mongoose, Express, Node.js, Bootstrap, OAuth, Google People API, Atlas, Heroku, JavaScript, CSS, HTML, EJS Templates
+Backend: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
+
+Authentication: OAuth, Google People API
+
+Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
 
 </br>
 
