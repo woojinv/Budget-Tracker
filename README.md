@@ -13,7 +13,7 @@ A minimalist budgeting app to kick-start your financial journey from your phone 
 
 </br>
 
-# Screenshots
+## Screenshots
 
 ![Current Budgets Page](https://i.imgur.com/95FCQ7r.png "Current Budgets Page")
 
@@ -21,7 +21,7 @@ A minimalist budgeting app to kick-start your financial journey from your phone 
 
 </br>
 
-# Technologies Used
+## Technologies Used
 
 Backend: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
 
@@ -31,7 +31,7 @@ Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
 
 </br>
 
-# Next Steps
+## Next Steps
 
 - Consume a third party banking API to display updated account balances with withdrawals and deposits.
 
