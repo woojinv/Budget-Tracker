@@ -25,11 +25,12 @@ A minimalist budgeting app to kick-start your financial journey from your phone 
 
 ## Technologies Used
 
+Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
+
 Backend: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
 
 Authentication: OAuth, Google People API
 
-Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
 
 </br>
 
