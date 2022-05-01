@@ -20,6 +20,8 @@ I became more comfortable with setting up a back-end server using Node.js and Ex
 
 I also improved my ability to manipulate the DOM using JavaScript while keeping in mind what's most important for the user experience. 
 
+I learned the value of constantly logging everything to the console to see and understand what's happening. I also came to appreciate the importance of a mobile-first design approach.
+
 
 ## Screenshots
 
