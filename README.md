@@ -13,15 +13,18 @@ A minimalist budgeting app to kick-start your financial journey from your phone 
 
 [Start tracking!](https://ga-budget-tracker.herokuapp.com/home)
 
+<br />
+
 
 ## What I learned
 
-I became more comfortable with setting up a back-end server using Node.js and Express, working with a database, and implementing authentication/authorization.
+- I became more comfortable with setting up a back-end server using Node.js and Express, working with a database, and implementing authentication/authorization.
 
-I also improved my ability to manipulate the DOM using JavaScript while keeping in mind what's most important for the user experience. 
+- I also improved my ability to manipulate the DOM using JavaScript while keeping in mind what's most important for the user experience. 
 
-I learned the value of constantly logging everything to the console to see and understand what's happening. I also came to appreciate the importance of a mobile-first design approach.
+- I learned the value of constantly logging everything to the console to see and understand what's happening. I also came to appreciate the importance of a mobile-first design approach.
 
+<br />
 
 ## Screenshots
 
@@ -33,11 +36,11 @@ I learned the value of constantly logging everything to the console to see and u
 
 ## Technologies Used
 
-Frontend: JavaScript, CSS, Bootstrap, HTML, EJS Templates
+- **Frontend**: JavaScript, CSS, Bootstrap, HTML, EJS Templates
 
-Backend: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
+- **Backend**: Node.js, Express, MongoDB and Mongoose, Atlas, Heroku
 
-Authentication: OAuth, Google People API
+- **Authentication**: OAuth, Google People API
 
 
 </br>
